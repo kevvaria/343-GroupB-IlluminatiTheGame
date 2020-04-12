@@ -40,10 +40,23 @@ public class gameInterface {
                     playerNameLabel.setText("a");
             }
         });
+
+        leaveGameButton.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
     }
 
+
     public static void main(String[] args){
-        JFrame frame = new JFrame("Appa");
+        JFrame frame = new JFrame("Illuminati: The Game of Conspiracy");
         frame.setContentPane(new gameInterface().mainPane);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
