@@ -5,6 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -69,7 +71,8 @@ public class Controller implements Initializable {
     private Button passTurnBtn;
     @FXML
     private TabPane mainTabbedPane;
-ArrayList<String> usernames;
+    ArrayList<String> usernames;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -89,6 +92,26 @@ ArrayList<String> usernames;
         mainMenuTA.setWrapText(true);
         helpTextArea.setWrapText(true);
         usernames = new ArrayList<String>();
+
+        //setting tooltips for all buttons
+        addPlayerBTN.setTooltip(new Tooltip("Add the username above to the lobby"));
+        startGameBtn.setTooltip(new Tooltip("Start game with current players in lobby"));
+        attackChoiceBox.setTooltip(new Tooltip("Select a form of attack"));
+        attackBtn.setTooltip(new Tooltip("Attack a group"));
+        groupChoiceBox.setTooltip(new Tooltip("Would you like to Move or Give a group?"));
+        groupActionBtn.setTooltip(new Tooltip("Move or Give a Group"));
+        specialCardChoiceBox.setTooltip(new Tooltip("Would you like to Use or Give away a Special Card?"));
+        specialCardActionBtn.setTooltip(new Tooltip("Use or Give a Special Card"));
+        giveMoneyActionBtn.setTooltip(new Tooltip("Give money to another player"));
+        tradeActionBtn.setTooltip(new Tooltip("Perform a Trade with another player"));
+        passTurnBtn.setTooltip(new Tooltip("Pass your turn without performing any actions"));
+        endTurnBtn.setTooltip(new Tooltip("End your turn after completing planned actions"));
+        forfeitBtn.setTooltip(new Tooltip("Select this if you want to leave the game"));
+        mainMenuTab.setTooltip(new Tooltip("View the Main Menu"));
+        gameplayTab.setTooltip(new Tooltip("View the Gameplay Board"));
+        helpTab.setTooltip(new Tooltip("View the game rules"));
+
+        //define all handle functions required for UI interaction
         addPlayerBTN.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -102,16 +125,19 @@ ArrayList<String> usernames;
                 else if(usernames.size()>=4){
                     mainMenuTA.appendText("LOBBY FULL. Cannot add any more players.\n");
                 }
-                else{                   //enable startGame button
+                else{
                     System.out.println(usernameTF.getText() + " joined\n");
                     mainMenuTA.appendText(usernameTF.getText() + " joined\n");
                     playerToViewChoiceBox.getItems().add(usernameTF.getText());
+                    usernames.add(usernameTF.getText());
+
                     if(usernames.size() >= 2){
                         startGameBtn.setDisable(false);
                         gameplayTab.setDisable(false);
                         playerToViewChoiceBox.getSelectionModel().select(0);
                     }
-                    usernameTF.clear();
+                }
+                usernameTF.clear();
                 }
             }
         });

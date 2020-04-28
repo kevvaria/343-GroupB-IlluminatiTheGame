@@ -65,12 +65,14 @@
                                 </rowConstraints>
                                  <children>
                                                         <TextField fx:id="usernameTF" promptText="Enter username here" GridPane.columnSpan="2" />
-                                                        <Button fx:id="addPlayerBTN" mnemonicParsing="false" text="Add Player" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                                        <Button fx:id="addPlayerBTN" defaultButton="true" mnemonicParsing="false" text="Add Player" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+
                                        <font>
                                           <Font name="Agency FB" size="14.0" />
                                        </font>
                                                         </Button>
-                                              <Button fx:id="startGameBtn" defaultButton="true" mnemonicParsing="false" text="START GAME!" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                              <Button fx:id="startGameBtn" mnemonicParsing="false" text="START GAME!" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+
                                        <font>
                                           <Font name="Agency FB" size="14.0" />
                                        </font>
@@ -196,7 +198,8 @@
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <children>
-                        <TextArea fx:id="helpTextArea" editable="false" promptText="All rules and illuminati cards will be shown here" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TextArea fx:id="helpTextArea" editable="false" promptText="All rules and illuminati cardsSrc will be shown here" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
                             <font>
                                 <Font name="Cambria" size="12.0" />
                             </font>
