@@ -5,7 +5,18 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToolBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
@@ -81,7 +92,6 @@ public class Controller implements Initializable {
         mainMenuTA.setWrapText(true);
         helpTextArea.setWrapText(true);
         usernames = new ArrayList<String>();
-        System.out.println("Arraylist size: " + usernames.size());
 
         //setting tooltips for all buttons
         addPlayerBTN.setTooltip(new Tooltip("Add the username above to the lobby"));
@@ -120,6 +130,7 @@ public class Controller implements Initializable {
                     mainMenuTA.appendText(usernameTF.getText() + " joined\n");
                     playerToViewChoiceBox.getItems().add(usernameTF.getText());
                     usernames.add(usernameTF.getText());
+
                     if(usernames.size() >= 2){
                         startGameBtn.setDisable(false);
                         gameplayTab.setDisable(false);
@@ -127,6 +138,7 @@ public class Controller implements Initializable {
                     }
                 }
                 usernameTF.clear();
+                }
             }
         });
 
