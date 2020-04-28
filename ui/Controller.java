@@ -20,6 +20,7 @@ import javafx.scene.layout.HBox;
 
 import java.net.URL;
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -68,7 +69,7 @@ public class Controller implements Initializable {
     private Button passTurnBtn;
     @FXML
     private TabPane mainTabbedPane;
-
+ArrayList<String> usernames;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -87,7 +88,7 @@ public class Controller implements Initializable {
         specialCardChoiceBox.getSelectionModel().select(0);
         mainMenuTA.setWrapText(true);
         helpTextArea.setWrapText(true);
-
+        usernames = new ArrayList<String>();
         addPlayerBTN.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -95,27 +96,23 @@ public class Controller implements Initializable {
                 if (usernameTF.getText().isEmpty()){
                     mainMenuTA.appendText("Username not entered. Please enter a valid username.\n");
                 }
-//                else if(){
-//                 check for usernames in the arraylist of usernames
-//                }
-//                else if(number of players in the lobby must be <=4){
-//                    mainMenuTA.appendText("LOBBY FULL. Cannot add any more players.\n");
-//                }
+                else if(usernames.contains(usernameTF.getText())){
+                    mainMenuTA.appendText(usernameTF.getText() + " is already taken.\n");
+                }
+                else if(usernames.size()>=4){
+                    mainMenuTA.appendText("LOBBY FULL. Cannot add any more players.\n");
+                }
                 else{                   //enable startGame button
                     System.out.println(usernameTF.getText() + " joined\n");
                     mainMenuTA.appendText(usernameTF.getText() + " joined\n");
                     playerToViewChoiceBox.getItems().add(usernameTF.getText());
-                    playerToViewChoiceBox.getSelectionModel().select(0);
-                    gameplayTab.setDisable(false);
-                    startGameBtn.setDisable(false);             //scrap this and uncomment the code below
+                    if(usernames.size() >= 2){
+                        startGameBtn.setDisable(false);
+                        gameplayTab.setDisable(false);
+                        playerToViewChoiceBox.getSelectionModel().select(0);
+                    }
                     usernameTF.clear();
                 }
-
-//                if(number of players in lobby < 2){
-//                    startGameBtn.setDisable(false);
-//                    playerToViewChoiceBox.getSelectionModel().select(0);
-//                }
-
             }
         });
 
@@ -188,5 +185,7 @@ public class Controller implements Initializable {
                 System.out.println("If only one player remains, then they are declared winner. Else, game continues.");
             }
         });
+
+
     }
 }
