@@ -28,7 +28,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TextArea?>
 
-<TabPane fx:id="mainTabbedPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="627.0" prefWidth="867.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.Controller">
+<TabPane fx:id="mainTabbedPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="671.0" prefWidth="1098.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.Controller">
     <tabs>
         <Tab fx:id="mainMenuTab" text="Main Menu">
             <content>
@@ -113,6 +113,7 @@
                         <HBox fx:id="actionsHB" alignment="BOTTOM_CENTER" nodeOrientation="LEFT_TO_RIGHT" spacing="1.0">
                            <children>
                               <Region HBox.hgrow="ALWAYS" />
+                              <ChoiceBox fx:id="playerToViewChoiceBox" prefHeight="28.0" prefWidth="90.0" />
                                         <ChoiceBox fx:id="attackChoiceBox" prefHeight="27.0" prefWidth="82.0" />
                                         <Button fx:id="attackBtn" mnemonicParsing="false" prefWidth="80.0" text="Attack" textAlignment="CENTER">
                                             <padding>
@@ -180,7 +181,14 @@
                                                 <Font name="Agency FB" size="14.0" />
                                             </font>
                                         </Button>
-                              <ChoiceBox fx:id="playerToViewChoiceBox" prefHeight="28.0" prefWidth="90.0" />
+                              <Button fx:id="exitBtn" mnemonicParsing="false" prefWidth="80.0" text="Exit" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Agency FB" size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </Button>
                               <Region HBox.hgrow="ALWAYS" />
                            </children>
                            <VBox.margin>
