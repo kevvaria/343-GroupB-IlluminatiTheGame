@@ -255,15 +255,13 @@ public class Controller implements Initializable {
 
     public void resetGame(){
         //send all cards back to their decks
-        System.out.println("UI reset status: Initializing");
         mainMenuTA.clear();
         usernames.clear();
         playerToViewChoiceBox.getItems().clear();
-        System.out.println("UI reset status: Ongoing");
         usernameTF.setDisable(false);
         startGameBtn.setDisable(true);
         addPlayerBTN.setDefaultButton(true);
-        System.out.println("UI reset status: Complete\n");
+        System.out.println("UI status: Reset Complete\n");
     }
 
     public void addPlayer(){
