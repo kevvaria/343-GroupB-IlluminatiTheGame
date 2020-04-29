@@ -2,18 +2,16 @@ package ui;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -257,12 +255,15 @@ public class Controller implements Initializable {
 
     public void resetGame(){
         //send all cards back to their decks
+        System.out.println("UI reset status: Initializing");
         mainMenuTA.clear();
         usernames.clear();
         playerToViewChoiceBox.getItems().clear();
+        System.out.println("UI reset status: Ongoing");
         usernameTF.setDisable(false);
         startGameBtn.setDisable(true);
         addPlayerBTN.setDefaultButton(true);
+        System.out.println("UI reset status: Complete\n");
     }
 
     public void addPlayer(){
