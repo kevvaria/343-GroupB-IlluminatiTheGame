@@ -1,5 +1,6 @@
 package ui;
 
+import game.Game;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -64,12 +65,14 @@ public class Controller implements Initializable {
     @FXML
     private Button exitBtn;
 
+    Game gamePlay = new Game();
     ArrayList<String> usernames;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         //UI Initial setup
+//        gamePlay.test();
         startGameBtn.setDisable(true);
         attackChoiceBox.getItems().add("Control");
         attackChoiceBox.getItems().add("Neutralize");
