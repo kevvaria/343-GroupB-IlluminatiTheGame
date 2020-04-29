@@ -113,7 +113,7 @@
                         <HBox fx:id="actionsHB" alignment="BOTTOM_CENTER" nodeOrientation="LEFT_TO_RIGHT" spacing="1.0">
                            <children>
                               <Region HBox.hgrow="ALWAYS" />
-                              <ChoiceBox fx:id="playerToViewChoiceBox" prefHeight="28.0" prefWidth="90.0" />
+                              <ChoiceBox fx:id="playerToViewChoiceBox" prefHeight="27.0" prefWidth="90.0" />
                                         <ChoiceBox fx:id="attackChoiceBox" prefHeight="27.0" prefWidth="82.0" />
                                         <Button fx:id="attackBtn" mnemonicParsing="false" prefWidth="80.0" text="Attack" textAlignment="CENTER">
                                             <padding>
