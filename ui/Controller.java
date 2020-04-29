@@ -1,11 +1,14 @@
 package ui;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
@@ -81,6 +84,7 @@ public class Controller implements Initializable {
         specialCardChoiceBox.getItems().add("Use");
         specialCardChoiceBox.getSelectionModel().select(0);
         mainTabbedPane.getTabs().remove(gameplayTab);
+//        usernameTF
 
         mainMenuTA.setWrapText(true);
         helpTextArea.setWrapText(true);
@@ -106,6 +110,17 @@ public class Controller implements Initializable {
         gameplayTab.setTooltip(new Tooltip("View the Gameplay Board"));
         helpTab.setTooltip(new Tooltip("View the game rules"));
         exitBtn.setTooltip(new Tooltip("Exit to Main Menu"));
+
+        usernameTF.lengthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                if (newValue.intValue() > oldValue.intValue()) {
+                    if (usernameTF.getText().length() >= 10) {
+                        usernameTF.setText(usernameTF.getText().substring(0, 10));
+                    }
+                }
+            }
+        });
 
         usernameTF.setOnAction(new EventHandler<ActionEvent>() {
             @Override
