@@ -44,6 +44,10 @@ public class Person {
     public void setPlayerHand(ArrayList<Card> playerHand) {
         this.playerHand = playerHand;
     }
+    public void setCardPlayerHand(Card cardPlayerHand)
+    {
+        playerHand.add(cardPlayerHand);
+    }
 
     public ArrayList<SpecialCard> getSpecialCards() {
         return specialCards;
