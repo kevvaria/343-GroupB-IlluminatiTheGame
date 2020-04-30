@@ -3,6 +3,8 @@ package game;
 import cardsSrc.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class Game {
     ArrayList<IlluminatiCard> illuminatiCards;
@@ -10,15 +12,18 @@ public class Game {
     ArrayList<Card> deck = new ArrayList<>();
     ArrayList<Card> discardPile = new ArrayList<>();
     ArrayList<GroupCard> uncontrolledGroupsPile = new ArrayList<>();
-    String currentPlayer;
+    Person currentPlayer;
+    int playerCount = 0;
 
     public Game(){
         illuminatiCards = new ArrayList<IlluminatiCard>();
-        playerList = new ArrayList<>();
+        playerList = new ArrayList<Person>();
         deck = new ArrayList<>();
         discardPile = new ArrayList<>();
         uncontrolledGroupsPile = new ArrayList<>();
-        currentPlayer = "";
+        //currentPlayer = new Person(get);
+        int playerCount = 0;
+        currentPlayer = playerList.get(playerCount);
     }
 
     public ArrayList<IlluminatiCard> getIlluminatiCards() {
@@ -61,11 +66,11 @@ public class Game {
         this.uncontrolledGroupsPile = uncontrolledGroupsPile;
     }
 
-    public String getCurrentPlayer() {
+    public Person getCurrentPlayer() {
         return currentPlayer;
     }
 
-    public void setCurrentPlayer(String currentPlayer) {
+    public void setCurrentPlayer(Person currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
 
@@ -81,6 +86,10 @@ public class Game {
         //add each card to the deck
 //        deck.add()
 
+        //deck.add(new Yuppies());
+        Person littleMan = new Person("Beginner");
+
+
 
         //shuffle deck
         //add players to the gameboard
@@ -92,23 +101,93 @@ public class Game {
     public void addAPlayer(Person playerToAdd){
         playerList.add(playerToAdd);
     }
+    public void collectIncome(Person currentPlayer)
+    {
+        currentPlayer.getIlluminatiCard().addIncome();
+        //add group cards to the list and check in list for income
+    }
 
     public void shuffleDeck(){
         //deck.shuffle();
+        Collections.shuffle(deck);
+
+    }
+    public void initialUncontrolled()
+    {
+        Card drawnCard = deck.remove(0);
+        while (uncontrolledGroupsPile.size()<4)
+        {
+            if (drawnCard instanceof SpecialCard)
+            {
+                deck.add(drawnCard);
+                shuffleDeck();
+            }
+            else
+            {
+                GroupCard gC = (GroupCard) drawnCard;
+                uncontrolledGroupsPile.add(gC);
+            }
+
+        }
     }
 
-    public void drawCardToUncontrolled(){
+    public void drawCard(){
         //pop from deck
         //if card is specialCard, add to their inventory.
         //else push to uncontrolled deck
+        //Card drawnCard = deck.get(0);
+         Card drawnCard = deck.remove(0);
+        if (drawnCard instanceof SpecialCard)
+        {
+            currentPlayer.setCardPlayerHand(drawnCard);
+            System.out.println(currentPlayer.getPlayerHand());
+
+        }
+        else
+        {
+            GroupCard group = (GroupCard) drawnCard;
+            uncontrolledGroupsPile.add(group);
+            System.out.println(uncontrolledGroupsPile);
+
+        }
+
+
+
+    }
+    public void drawUncontrolled()
+    {
+        Card drawnCard = deck.remove(0);
+        while (uncontrolledGroupsPile.size()<2)
+        {
+            if (drawnCard instanceof SpecialCard)
+            {
+                //add to player hand
+                //SpecialCard special = (SpecialCard) drawnCard;
+                deck.add(drawnCard);
+                //add shuffle deck
+            }
+            else
+            {
+                GroupCard gC = (GroupCard) drawnCard;
+                uncontrolledGroupsPile.add(gC);
+            }
+
+        }
     }
 
     public void shufflePlayOfOrder(){
         //use collections to randomize the playerList
+        Collections.shuffle(playerList);
     }
 
     public void assignIlluminatiCards(){
         //for each player in the playerList, assign an Illuminati Card using the Person.setter()
+        int i = 0;
+        //Person p = new Person("");
+        for(Person p:playerList)
+        {
+            p.setIlluminatiCard(illuminatiCards.get(i));
+        }
     }
 
     public void attack(String attackType, String attackingGroup, String targetGroup){
@@ -145,31 +224,75 @@ public class Game {
         // with targetPlayer.getPlayerHand().selectedGroupCard
     }
 
-    public void passMyTurn(){
+    public void passTurn(){
         //currentPlayer updates to the next player in playerList
+        int actionCheck = currentPlayer.getNumOfRegActionsLeft();
+        if (actionCheck == 2) {
+            currentPlayer.getIlluminatiCard().addBalance(5);
+            currentPlayer.setNumOfRegActionsLeft(0);
+        }
+        System.out.println(currentPlayer.getUsername() + " has collected 5 MB");
+        endTurn();
     }
 
     public void startNextTurn(){
         //currentPlayer picks up income
-        //currentPlayer places a valid groupCard. Call drawCardToUncontrolled() method.
+        //currentPlayer places a valid groupCard. Call drawCard() method.
+        collectIncome(currentPlayer);
+        drawCard();
+
     }
 
     public void endTurn(){
         //currentPlayer updates to the next player in the playerList
         //call on next player to start their turn by: startNextTurn()
+        int actions = currentPlayer.getNumOfRegActionsLeft();
+        if(actions != 0)
+            //prompt message asking player to continue
+        System.out.println(currentPlayer.getUsername() + "'s turn has ended");
+        playerCount = playerCount + 1;
+        if(playerCount == playerList.size())
+            playerCount = 0;
+        currentPlayer = playerList.get(playerCount);
+        System.out.println(currentPlayer.getUsername() + "'s turn");
     }
 
     public void forfeit(){
         //take all of currentPlayer.getPlayerHand and put it into discardPile. Then
         //if playerList.size() == 2, remove currentPlayer and the last man standing is the winner
         //else, remove current player from playerList and ensure the next players turn begins.
+        for(Card c : currentPlayer.getSpecialCards())
+        {
+            discardPile.add(c);
+
+        }
+        for(Card c : currentPlayer.getPlayerHand())
+        {
+            discardPile.add(c);
+        }
+        discardPile.add(currentPlayer.getIlluminatiCard());
+        currentPlayer.setIlluminatiCard(null);
+        ArrayList emptyList = currentPlayer.getSpecialCards();
+        emptyList.clear();
+        currentPlayer.setSpecialCards(emptyList);
+        currentPlayer.setPlayerHand(emptyList);
+        currentPlayer.setNumOfRegActionsLeft(0);
+        playerList.remove(currentPlayer);
+        if(playerList.size()==1) {
+            currentPlayer = playerList.get(0);
+            System.out.println(currentPlayer.getUsername() + " has won!");
+        }
+        else
+            endTurn();
     }
 
 
-//
-//    public void test() {
-//        System.out.println("Testing");
+
+    public void test() {
+        System.out.println("Testing");
 //        illuminatiCards.add(new TheUFOs());
 //        System.out.println("UFO: " + illuminatiCards.get(0).toString());
-//    }
+        drawCard();
+
+    }
 }
