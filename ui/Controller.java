@@ -17,54 +17,105 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
-    //variable declaration
-    @FXML
-    private Button attackBtn;
-    @FXML
-    private TextArea mainMenuTA;
-    @FXML
-    private Button groupActionBtn;
-    @FXML
-    private TextField usernameTF;
-    @FXML
-    private ChoiceBox<String> groupChoiceBox;
-    @FXML
-    private HBox actionsHB;
-    @FXML
-    private Button endTurnBtn;
-    @FXML
-    private Button addPlayerBTN;
-    @FXML
-    private Tab gameplayTab;
-    @FXML
-    private TextArea helpTextArea;
-    @FXML
-    private ChoiceBox<String> specialCardChoiceBox;
-    @FXML
-    private Button giveMoneyActionBtn;
-    @FXML
-    private Button forfeitBtn;
-    @FXML
-    private Tab helpTab;
-    @FXML
-    private ChoiceBox<String> playerToViewChoiceBox;
-    @FXML
-    private Button specialCardActionBtn;
-    @FXML
-    private ChoiceBox<String> attackChoiceBox;
-    @FXML
-    private Button tradeActionBtn;
-    @FXML
-    private Tab mainMenuTab;
-    @FXML
-    private Button startGameBtn;
-    @FXML
-    private Button passTurnBtn;
+    //variable declaration - UI elements
     @FXML
     private TabPane mainTabbedPane;
     @FXML
+    private Tab mainMenuTab;
+    @FXML
+    private Tab gameplayTab;
+    @FXML
+    private Tab helpTab;
+    @FXML
+    private Button attackBtn;
+    @FXML
+    private Button forfeitBtn;
+    @FXML
+    private Button specialCardActionBtn;
+    @FXML
+    private Button tradeActionBtn;
+    @FXML
+    private Button passTurnBtn;
+    @FXML
+    private Button groupActionBtn;
+    @FXML
+    private Button endTurnBtn;
+    @FXML
     private Button exitBtn;
+    @FXML
+    private Button startGameBtn;
+    @FXML
+    private Button addPlayerBTN;
+    @FXML
+    private Button giveMoneyActionBtn;
+    @FXML
+    private TextArea mainMenuTA;
+    @FXML
+    private TextArea gameplayTA;
+    @FXML
+    private TextArea helpTextArea;
+    @FXML
+    private TitledPane viewPlayersHandTP;
+    @FXML
+    private TitledPane attacksTP;
+    @FXML
+    private TitledPane groupsTP;
+    @FXML
+    private TitledPane specialCardsTP;
+    @FXML
+    private TitledPane giveMoneyTP;
+    @FXML
+    private TitledPane tradeTP;
+    @FXML
+    private TitledPane endTurnTP;
+    @FXML
+    private TitledPane exitGameTP;
+    @FXML
+    private TextField transferMoneyAmountTF;
+    @FXML
+    private TextField usernameTF;
+    @FXML
+    private ToggleGroup endTurnGroup;
+    @FXML
+    private ChoiceBox<String> attackChoiceBox;
+    @FXML
+    private ChoiceBox<String> attackingCardCB;
+    @FXML
+    private ChoiceBox<String> attackPlayerCB;
+    @FXML
+    private ChoiceBox<String> attackTargetGroupCB;
+    @FXML
+    private ChoiceBox<String> groupChoiceBox;
+    @FXML
+    private ChoiceBox<String> groupCardToGiveCB;
+    @FXML
+    private ChoiceBox<String> groupTargetPlayerCB;
+    @FXML
+    private ChoiceBox<String> groupTargetGroupCB;
+    @FXML
+    private ChoiceBox<String> specialCardChoiceBox;
+    @FXML
+    private ChoiceBox<String> specialCardToUseCB;
+    @FXML
+    private ChoiceBox<String> specialTargetPlayerCB;
+    @FXML
+    private ChoiceBox<String> specialCardTargetCB;
+    @FXML
+    private ChoiceBox<String> transferMoneyPlayerCB;
+    @FXML
+    private ChoiceBox<String> tradeGiveCardCB;
+    @FXML
+    private ChoiceBox<String> tradePersonCB;
+    @FXML
+    private ChoiceBox<String> tradeGetCardCB;
+    @FXML
+    private ChoiceBox<String> playerToViewChoiceBox;
+    @FXML
+    private RadioButton exitDenyRB;
+    @FXML
+    private RadioButton exitConfirmRB;
 
+    //variable declaration - source code dependant
     Game gamePlay = new Game();
     ArrayList<String> usernames;
 
@@ -85,7 +136,6 @@ public class Controller implements Initializable {
         specialCardChoiceBox.getItems().add("Use");
         specialCardChoiceBox.getSelectionModel().select(0);
         mainTabbedPane.getTabs().remove(gameplayTab);
-//        usernameTF
 
         mainMenuTA.setWrapText(true);
         helpTextArea.setWrapText(true);
@@ -160,7 +210,10 @@ public class Controller implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Attack Button - Clicked");
-                System.out.println("- Attack: " + attackChoiceBox.getValue() + "\n");
+                System.out.println("- Attack to " + attackChoiceBox.getValue() + " from " + attackingCardCB.getValue());
+                System.out.println("- Target Player: " + attackPlayerCB.getValue());
+                System.out.println("- Target Group: " + attackTargetGroupCB.getValue() + "\n");
+                //call attack method here. Parameters: attacking card, target player name, target group
             }
         });
 
@@ -176,7 +229,11 @@ public class Controller implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Group Actions Button - Clicked");
-                System.out.println("- Action: " + groupChoiceBox.getValue() + "\n");
+                System.out.println("- Action: " + groupChoiceBox.getValue());
+                System.out.println("- Selected group: " + groupCardToGiveCB.getValue());
+                System.out.println("- Target Player: " + groupTargetPlayerCB.getValue());
+                System.out.println("- Target Card: " + groupTargetGroupCB.getValue() + "\n");
+                //call group method here. Pass in action type, card to give, target player, target group
             }
         });
 
@@ -192,45 +249,51 @@ public class Controller implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Special Card Actions Button - Clicked");
-                System.out.println("- Action: " + specialCardChoiceBox.getValue() + "\n");
+                System.out.println("- Action: " + specialCardChoiceBox.getValue());
+                System.out.println("- Selected Card: " + specialCardToUseCB.getValue());
+                System.out.println("- Target Player: " + specialTargetPlayerCB.getValue());
+                System.out.println("- Target Card: " + specialCardTargetCB.getValue() + "\n");
             }
         });
 
         giveMoneyActionBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Popup prompts user to enter a recipient and amount of money to transfer.\n");
+                System.out.println("Give Money Button - Clicked");
+                System.out.println("- Player chosen: " + transferMoneyPlayerCB.getValue());
+                System.out.println("- Amount to Transfer: " + transferMoneyAmountTF.getText() + "\n");
             }
         });
 
         tradeActionBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("User is prompted to mandatorily select 3 things");
-                System.out.println("1. Item to give. 2. Player to trade with. 3. Item to receive\n");
+                System.out.println("Trade Button - Clicked");
+                System.out.println("- Card to trade: " + tradeGiveCardCB.getValue());
+                System.out.println("- Player to trade with: " + tradePersonCB.getValue());
+                System.out.println("- Card to receive: " + tradeGetCardCB.getValue() + "\n");
             }
         });
 
         passTurnBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Player turn has been passed. Player+1 has control now.");
-                System.out.println("Any actions taken in this turn will not be recorded.\n");
+                System.out.println("Pass Button - Clicked\n");
             }
         });
 
         endTurnBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("All actions attempted so far will be recorded.\nPlayer turn goes to next player.\n");
+                System.out.println("End Turn Button - Clicked\n");
             }
         });
 
         forfeitBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("User X has be removed from the gameplay.");
-                System.out.println("If only one player remains, then they are declared winner. Else, game continues.\n");
+                System.out.println("Forfiet Button - Clicked \n");
+                //reset all choice boxes to null, remove the player from arraylist, and repopulate the choice boxes
             }
         });
 
@@ -238,8 +301,9 @@ public class Controller implements Initializable {
         playerToViewChoiceBox.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Player View Changed to: " + playerToViewChoiceBox.getValue() + "\n");
-                playerToViewChoiceBox.setTooltip(new Tooltip("View: " + playerToViewChoiceBox.getValue() + "'s Structure"));
+                System.out.println("Viewing: " + playerToViewChoiceBox.getValue() + "'s Hand\n");
+                playerToViewChoiceBox.setTooltip(new Tooltip("Viewing: "
+                        + playerToViewChoiceBox.getValue() + "'s Structure"));
             }
         });
 
@@ -250,13 +314,13 @@ public class Controller implements Initializable {
                 addPlayerBTN.setDisable(false);
                 mainTabbedPane.getTabs().add(0, mainMenuTab);
                 mainTabbedPane.getTabs().remove(gameplayTab);
-                resetGame();
+                resetGameUI();
             }
         });
 
     }
 
-    public void resetGame(){
+    public void resetGameUI(){
         //send all cards back to their decks
         mainMenuTA.clear();
         usernames.clear();
