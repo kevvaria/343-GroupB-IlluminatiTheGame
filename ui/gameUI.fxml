@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.web.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.image.*?>
@@ -54,7 +55,7 @@
                         <HBox prefHeight="105.0" prefWidth="865.0" BorderPane.alignment="CENTER">
                            <children>
                               <Region HBox.hgrow="ALWAYS" />
-                              <GridPane>
+                              <GridPane HBox.hgrow="ALWAYS">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -65,12 +66,12 @@
                                 </rowConstraints>
                                  <children>
                                                         <TextField fx:id="usernameTF" promptText="Enter username here" GridPane.columnSpan="2" />
-                                                        <Button fx:id="addPlayerBTN" defaultButton="true" mnemonicParsing="false" text="Add Player" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                                        <Button fx:id="addPlayerBTN" defaultButton="true" mnemonicParsing="false" text="ADD PLAYER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                        <font>
                                           <Font name="Agency FB" size="14.0" />
                                        </font>
                                                         </Button>
-                                              <Button fx:id="startGameBtn" mnemonicParsing="false" text="START GAME!" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                              <Button fx:id="startGameBtn" mnemonicParsing="false" text="START GAME" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                        <font>
                                           <Font name="Agency FB" size="14.0" />
                                        </font>
@@ -109,7 +110,7 @@
                                 <Pane prefHeight="642.0" prefWidth="906.0" HBox.hgrow="ALWAYS" />
                         <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <TextArea fx:id="gameplayTA" VBox.vgrow="ALWAYS" />
+                              <TextArea fx:id="gameplayTA" editable="false" VBox.vgrow="ALWAYS" />
                               <Accordion>
                                 <panes>
                                     <TitledPane fx:id="viewPlayersHandTP" expanded="false" maxHeight="1.7976931348623157E308" text="View Any Players Hand" textOverrun="CLIP">
@@ -157,7 +158,7 @@
                                                   </rowConstraints>
                                                    <children>
                                                                 <ChoiceBox fx:id="attackChoiceBox" prefHeight="27.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-                                                                <Button fx:id="attackBtn" mnemonicParsing="false" prefHeight="27.0" prefWidth="200.0" text="Attack" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                                                <Button fx:id="attackBtn" defaultButton="true" mnemonicParsing="false" prefHeight="27.0" prefWidth="200.0" text="Attack" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                                                     <padding>
                                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                     </padding>
@@ -183,7 +184,7 @@
                                              <children>
                                                 <GridPane alignment="CENTER" layoutX="17.0" layoutY="8.0">
                                                    <children>
-                                                                <Button fx:id="groupActionBtn" mnemonicParsing="false" prefHeight="27.0" prefWidth="200.0" text="Apply" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                                                <Button fx:id="groupActionBtn" defaultButton="true" mnemonicParsing="false" prefHeight="27.0" prefWidth="200.0" text="Apply" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                                                     <padding>
                                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                     </padding>
@@ -226,10 +227,11 @@
                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                    </rowConstraints>
                                                    <children>
-                                                                <ChoiceBox fx:id="specialCardChoiceBox" prefHeight="25.0" prefWidth="100.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-                                                                <Button fx:id="specialCardActionBtn" mnemonicParsing="false" prefHeight="27.0" prefWidth="100.0" text="Apply" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                                                <ChoiceBox fx:id="specialCardChoiceBox" prefHeight="25.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                                                                <Button fx:id="specialCardActionBtn" defaultButton="true" mnemonicParsing="false" prefHeight="27.0" prefWidth="200.0" text="Apply" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                                                     <padding>
                                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                     </padding>
@@ -237,9 +239,8 @@
                                                                         <Font name="Agency FB" size="14.0" />
                                                                     </font>
                                                                 </Button>
-                                                      <ChoiceBox fx:id="specialCardTargetCB" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-                                                      <ChoiceBox fx:id="specialTargetPlayerCB" prefHeight="25.0" prefWidth="100.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-                                                      <ChoiceBox fx:id="specialCardToUseCB" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                                                      <ChoiceBox fx:id="specialTargetPlayerCB" prefHeight="25.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                                                      <ChoiceBox fx:id="specialCardToUseCB" prefHeight="25.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
                                                    </children>
                                                 </GridPane>
                                              </children>
@@ -255,16 +256,17 @@
                                              <children>
                                                 <GridPane layoutX="25.0" layoutY="12.0">
                                                   <columnConstraints>
-                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="123.0" minWidth="10.0" prefWidth="122.0" />
-                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="78.0" />
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="123.0" minWidth="10.0" prefWidth="47.0" />
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="153.0" />
                                                   </columnConstraints>
                                                   <rowConstraints>
                                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                   </rowConstraints>
                                                    <children>
-                                                                <Button fx:id="giveMoneyActionBtn" mnemonicParsing="false" prefHeight="27.0" prefWidth="90.0" text="Give Money" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                                <Button fx:id="giveMoneyActionBtn" defaultButton="true" mnemonicParsing="false" prefHeight="27.0" prefWidth="150.0" text="Give Money" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                                                     <padding>
                                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                     </padding>
@@ -272,18 +274,18 @@
                                                                         <Font name="Agency FB" size="14.0" />
                                                                     </font>
                                                                 </Button>
-                                                      <Label text="Enter Amount to Transfer: " wrapText="true" GridPane.rowIndex="1">
+                                                      <Label text="Amount:" wrapText="true" GridPane.rowIndex="1">
                                                          <font>
                                                             <Font name="Agency FB" size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label alignment="CENTER" text="Transfer Money to:" wrapText="true">
+                                                      <Label alignment="CENTER" text="Send to:" wrapText="true">
                                                          <font>
                                                             <Font name="Agency FB" size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <ChoiceBox fx:id="transferMoneyPlayerCB" prefHeight="27.0" prefWidth="75.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-                                                      <TextField fx:id="transferMoneyAmountTF" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                                                      <ChoiceBox fx:id="transferMoneyPlayerCB" prefHeight="27.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                                                      <Slider fx:id="transferAmountSlider" blockIncrement="1.0" majorTickUnit="5.0" max="10.0" minorTickCount="5" prefHeight="25.0" prefWidth="150.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
                                                    </children>
                                                 </GridPane>
                                              </children>
@@ -309,7 +311,7 @@
                                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                   </rowConstraints>
                                                    <children>
-                                                                <Button fx:id="tradeActionBtn" alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Trade" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                                                <Button fx:id="tradeActionBtn" alignment="TOP_CENTER" defaultButton="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Trade" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                                                     <padding>
                                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                     </padding>
@@ -382,7 +384,7 @@
                                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                   </rowConstraints>
                                                    <children>
-                                                      <Button fx:id="forfeitBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Forfeit" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                                      <Button fx:id="forfeitBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Forfeit" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                                          <font>
                                                             <Font name="Agency FB" size="14.0" />
                                                          </font>
@@ -390,7 +392,7 @@
                                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                          </padding>
                                                       </Button>
-                                                      <Button fx:id="exitBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Exit" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                                      <Button fx:id="exitBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Exit" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                                          <font>
                                                             <Font name="Agency FB" size="14.0" />
                                                          </font>
@@ -398,12 +400,12 @@
                                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                          </padding>
                                                       </Button>
-                                                      <Label prefHeight="22.0" prefWidth="140.0" text="Are you sure you sure?" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
+                                                      <Label prefHeight="22.0" prefWidth="140.0" text="Are you sure you sure?" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                                          <font>
                                                             <Font name="Agency FB" size="18.0" />
                                                          </font>
                                                       </Label>
-                                                      <RadioButton fx:id="exitConfirmRB" mnemonicParsing="false" text="Yes" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                      <RadioButton fx:id="exitConfirmRB" mnemonicParsing="false" text="Yes" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                                          <font>
                                                             <Font name="Agency FB" size="14.0" />
                                                          </font>
@@ -411,7 +413,7 @@
                                                             <ToggleGroup fx:id="endTurnGroup" />
                                                          </toggleGroup>
                                                       </RadioButton>
-                                                      <RadioButton fx:id="exitDenyRB" mnemonicParsing="false" selected="true" text="No" toggleGroup="$endTurnGroup" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                      <RadioButton fx:id="exitDenyRB" mnemonicParsing="false" selected="true" text="No" toggleGroup="$endTurnGroup" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                                          <font>
                                                             <Font name="Agency FB" size="14.0" />
                                                          </font>

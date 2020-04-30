@@ -71,9 +71,9 @@ public class Controller implements Initializable {
     @FXML
     private TitledPane exitGameTP;
     @FXML
-    private TextField transferMoneyAmountTF;
+    private Slider transferAmountSlider;
     @FXML
-    private TextField usernameTF;
+    TextField usernameTF;
     @FXML
     private ToggleGroup endTurnGroup;
     @FXML
@@ -98,8 +98,6 @@ public class Controller implements Initializable {
     private ChoiceBox<String> specialCardToUseCB;
     @FXML
     private ChoiceBox<String> specialTargetPlayerCB;
-    @FXML
-    private ChoiceBox<String> specialCardTargetCB;
     @FXML
     private ChoiceBox<String> transferMoneyPlayerCB;
     @FXML
@@ -143,24 +141,40 @@ public class Controller implements Initializable {
         System.out.println("Arraylist size: " + usernames.size());
 
         //setting tooltips for all buttons
+        playerToViewChoiceBox.setTooltip(new Tooltip("View: " + playerToViewChoiceBox.getValue() + "'s Structure"));
         addPlayerBTN.setTooltip(new Tooltip("Add the username above to the lobby"));
         startGameBtn.setTooltip(new Tooltip("Start game with current players in lobby"));
         attackChoiceBox.setTooltip(new Tooltip("Select a form of attack"));
+        attackingCardCB.setTooltip(new Tooltip("Select a card to attack with"));
+        attackPlayerCB.setTooltip(new Tooltip("Select a player whose group you want to attack"));
+        attackTargetGroupCB.setTooltip(new Tooltip("Pick a target group"));
         attackBtn.setTooltip(new Tooltip("Attack to " + attackChoiceBox.getValue()));
         groupChoiceBox.setTooltip(new Tooltip("Would you like to Move or Give a group?"));
+        groupCardToGiveCB.setTooltip(new Tooltip("List of cards in your structure"));
+        groupTargetPlayerCB.setTooltip(new Tooltip("List of players available"));
+        groupTargetGroupCB.setTooltip(new Tooltip("All groups available on the board"));
         groupActionBtn.setTooltip(new Tooltip(groupChoiceBox.getValue() + " a Group"));
         specialCardChoiceBox.setTooltip(new Tooltip("Would you like to Use or Give away a Special Card?"));
+        specialCardToUseCB.setTooltip(new Tooltip("Select a Special Card from your structure"));
+        specialTargetPlayerCB.setTooltip(new Tooltip("Select a player to give the special card to"));
         specialCardActionBtn.setTooltip(new Tooltip(specialCardChoiceBox.getValue() + " a Special Card"));
+        transferMoneyPlayerCB.setTooltip(new Tooltip("Select a player to receive the money"));
+        transferAmountSlider.setTooltip(new Tooltip("Select amount to transfer"));
         giveMoneyActionBtn.setTooltip(new Tooltip("Give money to another player"));
+        tradeGiveCardCB.setTooltip(new Tooltip("Select a Card to give"));
+        tradePersonCB.setTooltip(new Tooltip("Select a player to trade with"));
+        tradeGetCardCB.setTooltip(new Tooltip("Select a Card to get"));
         tradeActionBtn.setTooltip(new Tooltip("Perform a Trade with another player"));
         passTurnBtn.setTooltip(new Tooltip("Pass your turn without performing any actions"));
         endTurnBtn.setTooltip(new Tooltip("End your turn after completing planned actions"));
         forfeitBtn.setTooltip(new Tooltip("Select this if you want to leave the game"));
-        playerToViewChoiceBox.setTooltip(new Tooltip("View: " + playerToViewChoiceBox.getValue() + "'s Structure"));
         mainMenuTab.setTooltip(new Tooltip("View the Main Menu"));
         gameplayTab.setTooltip(new Tooltip("View the Gameplay Board"));
         helpTab.setTooltip(new Tooltip("View the game rules"));
         exitBtn.setTooltip(new Tooltip("Exit to Main Menu"));
+
+        transferAmountSlider.valueProperty().addListener((obs, oldval, newVal) ->
+                transferAmountSlider.setValue(Math.round(newVal.doubleValue())));
 
         usernameTF.lengthProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -181,6 +195,30 @@ public class Controller implements Initializable {
         });
 
         //define all handle functions required for UI interaction
+        attackChoiceBox.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Attack Mode changed to: " + attackChoiceBox.getValue() + "\n");
+                attackBtn.setTooltip(new Tooltip("Attack to " + attackChoiceBox.getValue()));
+            }
+        });
+
+        groupChoiceBox.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Group action changed to: " + groupChoiceBox.getValue() + "\n");
+                groupActionBtn.setTooltip(new Tooltip(groupChoiceBox.getValue() + " a Group"));
+            }
+        });
+
+        specialCardChoiceBox.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Special Card action changed to: " + specialCardChoiceBox.getValue() + "\n");
+                specialCardActionBtn.setTooltip(new Tooltip(specialCardChoiceBox.getValue() + " a Special Card"));
+            }
+        });
+
         addPlayerBTN.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -198,30 +236,15 @@ public class Controller implements Initializable {
             }
         });
 
-        attackChoiceBox.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Attack Mode changed to: " + attackChoiceBox.getValue() + "\n");
-                attackBtn.setTooltip(new Tooltip("Attack to " + attackChoiceBox.getValue()));
-            }
-        });
-
         attackBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Attack Button - Clicked");
-                System.out.println("- Attack to " + attackChoiceBox.getValue() + " from " + attackingCardCB.getValue());
-                System.out.println("- Target Player: " + attackPlayerCB.getValue());
-                System.out.println("- Target Group: " + attackTargetGroupCB.getValue() + "\n");
+                System.out.println("- Attack to " + attackChoiceBox.getValue() + "\n"
+                        + " from " + attackingCardCB.getValue() + "\n"
+                        + "- Target Player: " + attackPlayerCB.getValue() + "\n"
+                        + "- Target Group: " + attackTargetGroupCB.getValue() + "\n");
                 //call attack method here. Parameters: attacking card, target player name, target group
-            }
-        });
-
-        groupChoiceBox.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Group action changed to: " + groupChoiceBox.getValue() + "\n");
-                groupActionBtn.setTooltip(new Tooltip(groupChoiceBox.getValue() + " a Group"));
             }
         });
 
@@ -229,19 +252,11 @@ public class Controller implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Group Actions Button - Clicked");
-                System.out.println("- Action: " + groupChoiceBox.getValue());
-                System.out.println("- Selected group: " + groupCardToGiveCB.getValue());
-                System.out.println("- Target Player: " + groupTargetPlayerCB.getValue());
-                System.out.println("- Target Card: " + groupTargetGroupCB.getValue() + "\n");
+                System.out.println("- Action: " + groupChoiceBox.getValue() + "\n"
+                            + "- Selected group: " + groupCardToGiveCB.getValue() + "\n"
+                            + "- Target Player: " + groupTargetPlayerCB.getValue() + "\n"
+                            + "- Target Card: " + groupTargetGroupCB.getValue() + "\n");
                 //call group method here. Pass in action type, card to give, target player, target group
-            }
-        });
-
-        specialCardChoiceBox.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Special Card action changed to: " + specialCardChoiceBox.getValue() + "\n");
-                specialCardActionBtn.setTooltip(new Tooltip(specialCardChoiceBox.getValue() + " a Special Card"));
             }
         });
 
@@ -249,10 +264,9 @@ public class Controller implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Special Card Actions Button - Clicked");
-                System.out.println("- Action: " + specialCardChoiceBox.getValue());
-                System.out.println("- Selected Card: " + specialCardToUseCB.getValue());
-                System.out.println("- Target Player: " + specialTargetPlayerCB.getValue());
-                System.out.println("- Target Card: " + specialCardTargetCB.getValue() + "\n");
+                System.out.println("- Action: " + specialCardChoiceBox.getValue() + "\n"
+                        + "- Selected Card: " + specialCardToUseCB.getValue() + "\n"
+                        + "- Target Player: " + specialTargetPlayerCB.getValue() + "\n");
             }
         });
 
@@ -260,8 +274,8 @@ public class Controller implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Give Money Button - Clicked");
-                System.out.println("- Player chosen: " + transferMoneyPlayerCB.getValue());
-                System.out.println("- Amount to Transfer: " + transferMoneyAmountTF.getText() + "\n");
+                System.out.println("- Recipient: " + transferMoneyPlayerCB.getValue() + "\n"
+                                + "- Amount: " + transferAmountSlider.getValue() + "\n");
             }
         });
 
@@ -269,9 +283,9 @@ public class Controller implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Trade Button - Clicked");
-                System.out.println("- Card to trade: " + tradeGiveCardCB.getValue());
-                System.out.println("- Player to trade with: " + tradePersonCB.getValue());
-                System.out.println("- Card to receive: " + tradeGetCardCB.getValue() + "\n");
+                System.out.println("- Card to trade: " + tradeGiveCardCB.getValue()  + "\n"
+                        + "- Player to trade with: " + tradePersonCB.getValue()  + "\n"
+                        + "- Card to receive: " + tradeGetCardCB.getValue() + "\n");
             }
         });
 
@@ -327,7 +341,6 @@ public class Controller implements Initializable {
         playerToViewChoiceBox.getItems().clear();
         usernameTF.setDisable(false);
         startGameBtn.setDisable(true);
-        addPlayerBTN.setDefaultButton(true);
         System.out.println("UI status: Reset Complete\n");
     }
 
@@ -355,7 +368,6 @@ public class Controller implements Initializable {
         if(usernames.size() == 4){
             addPlayerBTN.setDisable(true);
             usernameTF.setDisable(true);
-            startGameBtn.setDefaultButton(true);
         }
         usernameTF.clear();
         playerToViewChoiceBox.setTooltip(new Tooltip("View: " + playerToViewChoiceBox.getValue() + "'s Structure"));
