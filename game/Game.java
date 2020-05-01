@@ -75,16 +75,9 @@ public class Game {
     }
 
     public void initGame(){
-        illuminatiCards.add(new TheUFOs());
-        illuminatiCards.add(new TheBavarianIlluminati());
-        illuminatiCards.add(new TheBermudaTriangle());
-        illuminatiCards.add(new TheDiscordianSociety());
-        illuminatiCards.add(new TheGnomesOfZurich());
-        illuminatiCards.add(new TheNetwork());
-        illuminatiCards.add(new TheServantsOfCthulhu());
-        illuminatiCards.add(new TheSocietyOfAssassins());
+
         //add each card to the deck
-//        deck.add()
+        loadCards();
 
         //deck.add(new Yuppies());
         Person littleMan = new Person("Beginner");
@@ -108,10 +101,20 @@ public class Game {
     }
 
     public void shuffleDeck(){
-        //deck.shuffle();
         Collections.shuffle(deck);
+    }
+
+    public void shufflePlayOfOrder(){
+
+        Collections.shuffle(playerList);
+        // Display order of players
+        System.out.println("Turn order determined:");
+        for(int i = 0; i < playerList.size(); i++) {
+            System.out.println((i + 1) + ". " + playerList.get(i));
+        }
 
     }
+
     public void initialUncontrolled()
     {
         Card drawnCard = deck.remove(0);
@@ -136,7 +139,7 @@ public class Game {
         //if card is specialCard, add to their inventory.
         //else push to uncontrolled deck
         //Card drawnCard = deck.get(0);
-         Card drawnCard = deck.remove(0);
+        Card drawnCard = deck.remove(0);
         if (drawnCard instanceof SpecialCard)
         {
             currentPlayer.setCardPlayerHand(drawnCard);
@@ -175,10 +178,7 @@ public class Game {
         }
     }
 
-    public void shufflePlayOfOrder(){
-        //use collections to randomize the playerList
-        Collections.shuffle(playerList);
-    }
+
 
     public void assignIlluminatiCards(){
         //for each player in the playerList, assign an Illuminati Card using the Person.setter()
@@ -249,7 +249,7 @@ public class Game {
         int actions = currentPlayer.getNumOfRegActionsLeft();
         if(actions != 0)
             //prompt message asking player to continue
-        System.out.println(currentPlayer.getUsername() + "'s turn has ended");
+            System.out.println(currentPlayer.getUsername() + "'s turn has ended");
         playerCount = playerCount + 1;
         if(playerCount == playerList.size())
             playerCount = 0;
@@ -285,6 +285,123 @@ public class Game {
         else
             endTurn();
     }
+
+    void loadCards(){
+        // Illuminati Cards
+        illuminatiCards.add(new TheDiscordianSociety());
+        illuminatiCards.add(new TheNetwork());
+        illuminatiCards.add(new TheSocietyOfAssassins());
+        illuminatiCards.add(new TheUFOs());
+        illuminatiCards.add(new TheServantsOfCthulhu());
+        illuminatiCards.add(new TheGnomesOfZurich());
+        illuminatiCards.add(new TheBavarianIlluminati());
+        illuminatiCards.add(new TheBermudaTriangle());
+
+        // Group Cards
+        deck.add(new AmericanAutoduelAssociation());
+        deck.add(new AntiNuclearActivists());
+        deck.add(new AntiWarActivists());
+        deck.add(new BigMedia());
+        deck.add(new BoySprouts());
+        deck.add(new California());
+        deck.add(new CFLAIO());
+        deck.add(new ChineseCampDonor());
+        deck.add(new CIA());
+        deck.add(new CloneArrangers());
+        deck.add(new ComicBooks());
+        deck.add(new CongressionalWives());
+        deck.add(new ConvenienceStores());
+        deck.add(new CopyShops());
+        deck.add(new CycleGangs());
+        deck.add(new Democrats());
+        deck.add(new EcoGuerrillas());
+        deck.add(new EmptyVee());
+        deck.add(new EvilGeniusesForABetterTomorrow());
+        deck.add(new FastFoodChains());
+        deck.add(new FBI());
+        deck.add(new FederalReserve());
+        deck.add(new Feminists());
+        deck.add(new FiendishFluidators());
+        deck.add(new FlatEarthers());
+        deck.add(new FnordMotorCompany());
+        deck.add(new FraternalOrders());
+        deck.add(new GirlieMagazines());
+        deck.add(new GoldfishFanciers());
+        deck.add(new GunLobby());
+        deck.add(new Hackers());
+        deck.add(new HealthFoodStores());
+        deck.add(new Hollywood());
+        deck.add(new Intellectuals());
+        deck.add(new InternationalCocaineSmugglers());
+        deck.add(new InternationalCommConspiracy());
+        deck.add(new IRS());
+        deck.add(new JunkMail());
+        deck.add(new KGB());
+        deck.add(new KKK());
+        deck.add(new L4Society());
+        deck.add(new Libertarians());
+        deck.add(new LoanSharks());
+        deck.add(new LocalPoliceDepartments());
+        deck.add(new MadisonAvenue());
+        deck.add(new Militias());
+        deck.add(new Moonies());
+        deck.add(new MoralMinority());
+        deck.add(new Morticians());
+        deck.add(new MultinationalOilCompanies());
+        deck.add(new NephewsOfGod());
+        deck.add(new NewYork());
+        deck.add(new NuclearPowerCompanies());
+        deck.add(new OrbitalMindControlLasers());
+        deck.add(new ParentTeacherAgglomeration());
+        deck.add(new Pentagon());
+        deck.add(new ThePhoneCompany());
+        deck.add(new PhonePhreaks());
+        deck.add(new PostOffice());
+        deck.add(new ProfessionalSports());
+        deck.add(new Psychiatrists());
+        deck.add(new PunkRockers());
+        deck.add(new Recyclers());
+        deck.add(new Republicans());
+        deck.add(new RobotSeaMonsters());
+        deck.add(new SciFiFans());
+        deck.add(new SemiconsciousLiberationArmy());
+        deck.add(new SMOF());
+        deck.add(new SocietyForCreativeAnarchism());
+        deck.add(new SouthAmericanNazis());
+        deck.add(new Survivalists());
+        deck.add(new Tabloids());
+        deck.add(new Texas());
+        deck.add(new TheMafia());
+        deck.add(new TheMenInBlack());
+        deck.add(new TheUnitedNations());
+        deck.add(new TobaccoAndLiquorCompanies());
+        deck.add(new Trekkies());
+        deck.add(new TriliberalCommission());
+        deck.add(new TVPreachers());
+        deck.add(new UndergroundNewspaper());
+        deck.add(new VideoGames());
+        deck.add(new Yuppies());
+
+
+
+        // Ability Cards
+        deck.add(new Assassination());
+        deck.add(new Bribery());
+        deck.add(new ComputerEspionage());
+        deck.add(new DeepAgent());
+        deck.add(new Interference());
+        deck.add(new Interference());
+        deck.add(new MarketManipulation());
+        deck.add(new MediaCampaign());
+        deck.add(new MurphysLaw());
+        deck.add(new SecretsManWasNotMeantToKnow());
+        deck.add(new SenateInvestigatingCommittee());
+        deck.add(new SlushFund());
+        deck.add(new SwissBankAccount());
+        deck.add(new WhisperingCampaign());
+        deck.add(new WhiteCollarCrime());
+    }
+
 
 
 
