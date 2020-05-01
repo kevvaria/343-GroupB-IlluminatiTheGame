@@ -8,10 +8,10 @@ import java.util.Collections;
 
 public class Game {
     ArrayList<IlluminatiCard> illuminatiCards;
-    ArrayList<Person> playerList = new ArrayList<>();
-    ArrayList<Card> deck = new ArrayList<>();
-    ArrayList<Card> discardPile = new ArrayList<>();
-    ArrayList<GroupCard> uncontrolledGroupsPile = new ArrayList<>();
+    ArrayList<Person> playerList;
+    ArrayList<Card> deck;
+    ArrayList<Card> discardPile;
+    ArrayList<GroupCard> uncontrolledGroupsPile;
     Person currentPlayer;
     int playerCount = 0;
 
@@ -23,7 +23,6 @@ public class Game {
         uncontrolledGroupsPile = new ArrayList<>();
         //currentPlayer = new Person(get);
         int playerCount = 0;
-        currentPlayer = playerList.get(playerCount);
     }
 
     public ArrayList<IlluminatiCard> getIlluminatiCards() {
@@ -82,8 +81,6 @@ public class Game {
         //deck.add(new Yuppies());
         Person littleMan = new Person("Beginner");
 
-
-
         //shuffle deck
         //add players to the gameboard
         //give each player an illuminati card
@@ -91,11 +88,21 @@ public class Game {
         //grab 4 groupcards and place them on the board. All specialcards are left in the original deck.
     }
 
-    public void addAPlayer(Person playerToAdd){
-        playerList.add(playerToAdd);
+    public boolean addAPlayer(Person playerToAdd){
+        boolean playerAdded = true;
+        for (Person target:playerList) {
+            if(target.getUsername().equalsIgnoreCase(playerToAdd.getUsername())){
+                playerAdded = false;
+                break;
+            }
+        }
+        if(playerAdded){
+            playerList.add(playerToAdd);
+        }
+        return playerAdded;
     }
-    public void collectIncome(Person currentPlayer)
-    {
+
+    public void collectIncome(Person currentPlayer) {
         currentPlayer.getIlluminatiCard().addIncome();
         //add group cards to the list and check in list for income
     }
@@ -115,8 +122,7 @@ public class Game {
 
     }
 
-    public void initialUncontrolled()
-    {
+    public void initialUncontrolled() {
         Card drawnCard = deck.remove(0);
         while (uncontrolledGroupsPile.size()<4)
         {
@@ -157,8 +163,8 @@ public class Game {
 
 
     }
-    public void drawUncontrolled()
-    {
+
+    public void drawUncontrolled() {
         Card drawnCard = deck.remove(0);
         while (uncontrolledGroupsPile.size()<2)
         {
@@ -177,8 +183,6 @@ public class Game {
 
         }
     }
-
-
 
     public void assignIlluminatiCards(){
         //for each player in the playerList, assign an Illuminati Card using the Person.setter()
@@ -401,9 +405,6 @@ public class Game {
         deck.add(new WhisperingCampaign());
         deck.add(new WhiteCollarCrime());
     }
-
-
-
 
     public void test() {
         System.out.println("Testing");
