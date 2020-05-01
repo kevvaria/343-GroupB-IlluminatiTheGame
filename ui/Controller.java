@@ -1,6 +1,7 @@
 package ui;
 
 import game.Game;
+import game.Person;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -8,12 +9,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -115,7 +112,6 @@ public class Controller implements Initializable {
 
     //variable declaration - source code dependant
     Game gamePlay = new Game();
-    ArrayList<String> usernames;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -137,8 +133,6 @@ public class Controller implements Initializable {
 
         mainMenuTA.setWrapText(true);
         helpTextArea.setWrapText(true);
-        usernames = new ArrayList<String>();
-        System.out.println("Arraylist size: " + usernames.size());
 
         //setting tooltips for all buttons
         playerToViewChoiceBox.setTooltip(new Tooltip("View: " + playerToViewChoiceBox.getValue() + "'s Structure"));
@@ -176,24 +170,6 @@ public class Controller implements Initializable {
         transferAmountSlider.valueProperty().addListener((obs, oldval, newVal) ->
                 transferAmountSlider.setValue(Math.round(newVal.doubleValue())));
 
-        usernameTF.lengthProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                if (newValue.intValue() > oldValue.intValue()) {
-                    if (usernameTF.getText().length() >= 10) {
-                        usernameTF.setText(usernameTF.getText().substring(0, 10));
-                    }
-                }
-            }
-        });
-
-        usernameTF.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                addPlayer();
-            }
-        });
-
         //define all handle functions required for UI interaction
         attackChoiceBox.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -219,10 +195,28 @@ public class Controller implements Initializable {
             }
         });
 
+        usernameTF.lengthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                if (newValue.intValue() > oldValue.intValue()) {
+                    if (usernameTF.getText().length() >= 10) {
+                        usernameTF.setText(usernameTF.getText().substring(0, 10));
+                    }
+                }
+            }
+        });
+
+        usernameTF.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                addPlayerUI();
+            }
+        });
+
         addPlayerBTN.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                addPlayer();
+                addPlayerUI();
             }
         });
 
@@ -337,37 +331,35 @@ public class Controller implements Initializable {
     public void resetGameUI(){
         //send all cards back to their decks
         mainMenuTA.clear();
-        usernames.clear();
         playerToViewChoiceBox.getItems().clear();
         usernameTF.setDisable(false);
         startGameBtn.setDisable(true);
         System.out.println("UI status: Reset Complete\n");
     }
 
-    public void addPlayer(){
+    public void addPlayerUI(){
         System.out.println("Add Player Button - Clicked");
-
-        if (usernameTF.getText().isEmpty()){
+        String username = usernameTF.getText();
+        if (username.isEmpty()){
             mainMenuTA.appendText("Username not entered. Please enter a valid username.\n");
         }
-        else if(usernames.contains(usernameTF.getText())){
-            mainMenuTA.appendText(usernameTF.getText() + " is already taken.\n");
-        }
-        else{
-            System.out.println(usernameTF.getText() + " joined\n");
-            mainMenuTA.appendText(usernameTF.getText() + " joined\n");
+        else if(gamePlay.addAPlayer(new Person(username))){     //attempt to add player results in T/F
+            System.out.println(username + " joined\n");         //if true, then output that the player is added
+            mainMenuTA.appendText(username + " joined\n");
             playerToViewChoiceBox.getItems().add(usernameTF.getText());
-            usernames.add(usernameTF.getText());
-            if(usernames.size() >= 2){
+            if(gamePlay.getPlayerList().size() >= 2){
                 startGameBtn.setDisable(false);
                 gameplayTab.setDisable(false);
                 playerToViewChoiceBox.getSelectionModel().select(0);
             }
         }
+        else{                                                   //if false, then output that the player exists
+            mainMenuTA.appendText(username + " is already taken.\n");
+        }
 
-        if(usernames.size() == 4){
-            addPlayerBTN.setDisable(true);
+        if(gamePlay.getPlayerList().size() == 4){
             usernameTF.setDisable(true);
+            addPlayerBTN.setDisable(true);
         }
         usernameTF.clear();
         playerToViewChoiceBox.setTooltip(new Tooltip("View: " + playerToViewChoiceBox.getValue() + "'s Structure"));
