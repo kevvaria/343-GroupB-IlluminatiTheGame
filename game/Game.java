@@ -406,6 +406,16 @@ public class Game {
         deck.add(new WhiteCollarCrime());
     }
 
+    public ArrayList<String> resetOpponents(){
+        ArrayList<String> opponents = new ArrayList<>();
+        for(Person person : playerList){
+            if(!person.getUsername().equals(currentPlayer.getUsername())){
+                opponents.add(person.getUsername());
+            }
+        }
+        return opponents;
+    }
+
     public void test() {
         System.out.println("Testing");
 //        illuminatiCards.add(new TheUFOs());
