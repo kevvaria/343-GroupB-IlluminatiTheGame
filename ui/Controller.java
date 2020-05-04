@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -112,6 +113,7 @@ public class Controller implements Initializable {
 
     //variable declaration - source code dependant
     Game gamePlay = new Game();
+    ArrayList<String> opponents = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -227,6 +229,14 @@ public class Controller implements Initializable {
                 mainTabbedPane.getTabs().remove(mainMenuTab);
                 mainTabbedPane.getTabs().add(0, gameplayTab);
                 mainTabbedPane.getSelectionModel().select(0);
+                gamePlay.initGame();
+                gamePlay.assignIlluminatiCards();
+                gamePlay.drawCard();
+                gamePlay.drawCard();
+                gamePlay.drawCard();
+                gamePlay.drawCard();
+                gamePlay.setCurrentPlayer(gamePlay.getPlayerList().get(0));
+                updateOpponentsUI();
             }
         });
 
@@ -287,6 +297,8 @@ public class Controller implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Pass Button - Clicked\n");
+                gamePlay.passTurn();
+                updateOpponentsUI();
             }
         });
 
@@ -294,6 +306,8 @@ public class Controller implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("End Turn Button - Clicked\n");
+                gamePlay.endTurn();
+                updateOpponentsUI();
             }
         });
 
@@ -332,6 +346,11 @@ public class Controller implements Initializable {
         //send all cards back to their decks
         mainMenuTA.clear();
         playerToViewChoiceBox.getItems().clear();
+        attackTargetGroupCB.getItems().clear();
+        groupTargetPlayerCB.getItems().clear();
+        specialTargetPlayerCB.getItems().clear();
+        transferMoneyPlayerCB.getItems().clear();
+        tradePersonCB.getItems().clear();
         usernameTF.setDisable(false);
         startGameBtn.setDisable(true);
         System.out.println("UI status: Reset Complete\n");
@@ -363,5 +382,29 @@ public class Controller implements Initializable {
         }
         usernameTF.clear();
         playerToViewChoiceBox.setTooltip(new Tooltip("View: " + playerToViewChoiceBox.getValue() + "'s Structure"));
+    }
+
+    public void updateOpponentsUI(){
+        attackPlayerCB.getItems().clear();
+        groupTargetPlayerCB.getItems().clear();
+        specialTargetPlayerCB.getItems().clear();
+        transferMoneyPlayerCB.getItems().clear();
+        tradePersonCB.getItems().clear();
+
+        opponents = gamePlay.resetOpponents();
+        for(String oppName: opponents){
+            attackPlayerCB.getItems().add(oppName);
+            groupTargetPlayerCB.getItems().add(oppName);
+            specialTargetPlayerCB.getItems().add(oppName);
+            transferMoneyPlayerCB.getItems().add(oppName);
+            tradePersonCB.getItems().add(oppName);
+        }
+
+        attackPlayerCB.getSelectionModel().select(0);
+        groupTargetPlayerCB.getSelectionModel().select(0);
+        specialTargetPlayerCB.getSelectionModel().select(0);
+        transferMoneyPlayerCB.getSelectionModel().select(0);
+        tradePersonCB.getSelectionModel().select(0);
+
     }
 }
