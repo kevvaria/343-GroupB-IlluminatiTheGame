@@ -7,6 +7,7 @@ public class ParentTeacherAgglomeration extends GroupCard{
 		addAlignment(Alignments.Straight);
 		addAlignment(Alignments.Conservative);
 		addAlignment(Alignments.Peaceful);
+		numOfOutwardArrows = 0;
 	}
 	}
 	

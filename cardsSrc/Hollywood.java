@@ -9,6 +9,7 @@ public class Hollywood extends GroupCard{
 		
 		hasRightArrow = true;
 		hasBottomArrow = true;
+		numOfOutwardArrows = 2;
 	}
 	
 }

@@ -6,5 +6,6 @@ public class BoySprouts extends GroupCard {
 		
 		addAlignment(Alignments.Straight);
 		addAlignment(Alignments.Peaceful);
+		numOfOutwardArrows = 0;
 	}
 }

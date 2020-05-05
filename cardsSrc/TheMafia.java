@@ -9,5 +9,6 @@ public class TheMafia extends GroupCard{
 		hasTopArrow = true;
 		hasLeftArrow = true;
 		hasBottomArrow = true;
+		numOfOutwardArrows = 3;
 	}
 }

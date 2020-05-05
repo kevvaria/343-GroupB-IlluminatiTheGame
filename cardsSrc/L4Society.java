@@ -7,6 +7,7 @@ public class L4Society extends GroupCard{
 		addAlignment(Alignments.Weird);
 		
 		hasLeftArrow = true;
+		numOfOutwardArrows = 1;
 	}
 	
 }

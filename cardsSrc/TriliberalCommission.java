@@ -8,6 +8,7 @@ public class TriliberalCommission extends GroupCard{
 		
 		hasTopArrow = true;
 		hasBottomArrow = true;
+		numOfOutwardArrows = 2;
 
 	}
 }

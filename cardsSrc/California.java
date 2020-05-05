@@ -7,9 +7,11 @@ public class California extends GroupCard {
 		addAlignment(Alignments.Weird);
 		addAlignment(Alignments.Liberal);
 		addAlignment(Alignments.Peaceful);
-		
+
 		hasTopArrow = true;
 		hasBottomArrow = true;
+		numOfOutwardArrows = 2;
 	}
-
 }
+
+

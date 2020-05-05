@@ -7,6 +7,7 @@ public class JunkMail extends GroupCard{
 		addAlignment(Alignments.Criminal);
 
 		hasBottomArrow = true;
+		numOfOutwardArrows = 1;
 	}
 	
 }

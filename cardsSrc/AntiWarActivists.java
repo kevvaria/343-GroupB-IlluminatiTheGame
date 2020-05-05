@@ -7,6 +7,7 @@ public class AntiWarActivists extends GroupCard {
 		
 		addAlignment(Alignments.Liberal);
 		addAlignment(Alignments.Peaceful);
+		numOfOutwardArrows = 0;
 	}
-
 }
+

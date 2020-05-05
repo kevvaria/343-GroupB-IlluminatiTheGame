@@ -5,5 +5,6 @@ public class SocietyForCreativeAnarchism extends GroupCard {
         super("Society for Creative Anarchism", -1, -1, 4, 1);
         addAlignment(Alignments.Violent);
         addAlignment(Alignments.Weird);
+        numOfOutwardArrows = 0;
     }
 }

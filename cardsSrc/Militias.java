@@ -8,5 +8,6 @@ public class Militias extends GroupCard{
 		addAlignment(Alignments.Violent);
 		
 		hasRightArrow = true;
+		numOfOutwardArrows = 1;
 	}
 }

@@ -6,6 +6,6 @@ public class Survivalists extends GroupCard {
         addAlignment(Alignments.Conservative);
         addAlignment(Alignments.Violent);
         addAlignment(Alignments.Fanatic);
-
+        numOfOutwardArrows = 0;
     }
 }

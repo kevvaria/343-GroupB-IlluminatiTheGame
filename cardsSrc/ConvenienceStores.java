@@ -8,6 +8,7 @@ public class ConvenienceStores extends GroupCard {
 
 		
 		hasBottomArrow = true;
+		numOfOutwardArrows = 1;
 	}
 
 }

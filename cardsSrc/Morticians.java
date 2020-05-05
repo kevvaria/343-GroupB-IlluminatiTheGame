@@ -6,6 +6,7 @@ public class Morticians extends GroupCard{
 		super("Morticians", -1, -1, 4, 1);
 		addAlignment(Alignments.Straight);
 		addAlignment(Alignments.Peaceful);
+		numOfOutwardArrows = 0;
 	}
 	}
 	

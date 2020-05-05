@@ -10,6 +10,7 @@ public class Pentagon extends GroupCard{
 		hasTopArrow = true;
 		hasRightArrow = true;
 		hasBottomArrow = true;
+		numOfOutwardArrows = 3;
 	}
 }
 	

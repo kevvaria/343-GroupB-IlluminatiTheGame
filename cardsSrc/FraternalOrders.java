@@ -7,6 +7,7 @@ public class FraternalOrders extends GroupCard {
 		addAlignment(Alignments.Conservative);
 		
 		hasTopArrow = true;
+		numOfOutwardArrows = 1;
 	}
 	
 }

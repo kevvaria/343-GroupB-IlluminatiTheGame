@@ -10,6 +10,7 @@ public class InternationalCommConspiracy extends GroupCard {
         hasTopArrow = true;
         hasLeftArrow = true;
         hasBottomArrow = true;
+        numOfOutwardArrows = 3;
     }
 
 }

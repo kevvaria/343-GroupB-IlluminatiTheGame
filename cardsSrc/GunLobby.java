@@ -9,6 +9,7 @@ public class GunLobby extends GroupCard{
 		
 		hasBottomArrow = true;
 		hasLeftArrow = true;
+		numOfOutwardArrows = 2;
 	}
 	
 }

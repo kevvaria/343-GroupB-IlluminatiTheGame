@@ -9,6 +9,7 @@ public class ProfessionalSports extends GroupCard{
 		
 		hasRightArrow = true;
 		hasBottomArrow = true;
+		numOfOutwardArrows = 2;
 	}
 }
 	

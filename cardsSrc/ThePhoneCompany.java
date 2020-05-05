@@ -8,5 +8,6 @@ public class ThePhoneCompany extends GroupCard{
 
         hasRightArrow = true;
         hasBottomArrow = true;
+        numOfOutwardArrows = 2;
     }
 }

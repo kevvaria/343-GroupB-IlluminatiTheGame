@@ -16,20 +16,20 @@ public abstract class GroupCard extends Card{
 	 * These refer to whether a card has arrows pointed outwards indicating that a
 	 * group can be controlled on that side. Illuminati cards have every arrow available
 	 * while group cards may have all but the left arrow. For regular group cards the
-	 * there is no left arrrow since that is the one it is controlled by.
+	 * there is no left arrow since that is the one it is controlled by.
 	 */
 	protected boolean hasLeftArrow = false;
 	protected boolean hasTopArrow = false;
 	protected boolean hasRightArrow = false;
 	protected boolean hasBottomArrow = false;
+	int numOfOutwardArrows;
 	
 	// Attached cards
 	protected GroupCard topCard;
 	protected GroupCard rightCard;
 	protected GroupCard bottomCard;
 	protected GroupCard leftCard;
-	
-	protected SourceDirection source = SourceDirection.LEFT;
+
 	
 	/*
 	 * If card does not have a certain attribute (the card doesn't have a power or resistance
@@ -93,39 +93,19 @@ public abstract class GroupCard extends Card{
 	
 	public ArrayList<Alignments> getAlignments(){
 		return alignments;
-	}
-	
-	public void attachTop(GroupCard card) {
-		topCard = card;
-	}
-	
-	public void attachRight(GroupCard card) {
-		rightCard = card;
-	}
-	
-	public void attachBottom(GroupCard card) {
-		bottomCard = card;
-	}
-	
-	public void attachLeft(GroupCard card) {
-		leftCard = card;
-	}
-	
-	public GroupCard getTopCard() {
-		return topCard;
-	}
-	
-	public GroupCard getRightCard() {
-		return rightCard;
-	}
-	
-	public GroupCard getBottomCard() {
-		return bottomCard;
-	}
+	} //returns the alignments of the card
+
+	public int getNumOfOutwardArrows() { return numOfOutwardArrows;} //returns the total number of outwards arrow
+
 	
 	public GroupCard getLeftCard() {
 		return leftCard;
 	}
+	public boolean getLeftArrow() {return hasLeftArrow;};
+	public boolean getRightArrow() {return hasRightArrow;};
+	public boolean getTopArrow(){return  hasTopArrow;};
+	public boolean getBottomArrow() {return hasBottomArrow;};
+
 	
 	@Override
 	public String toString() {

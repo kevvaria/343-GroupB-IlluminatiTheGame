@@ -7,5 +7,6 @@ public class Recyclers extends GroupCard{
 		addAlignment(Alignments.Liberal);
 		
 		hasLeftArrow = true;
+		numOfOutwardArrows = 1;
 	}
 }

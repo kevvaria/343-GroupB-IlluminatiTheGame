@@ -6,6 +6,9 @@ public class GoldfishFanciers extends GroupCard {
 		super("Goldfish Fanciers", -1, -1, 4, 1);
 		addAlignment(Alignments.Peaceful);
 		addAlignment(Alignments.Fanatic);
+
+		numOfOutwardArrows = 0;
 	}
+
 	
 }

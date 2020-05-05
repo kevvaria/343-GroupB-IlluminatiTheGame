@@ -7,6 +7,7 @@ public class MadisonAvenue extends GroupCard{
 		
 		hasLeftArrow = true;
 		hasBottomArrow = true;
+		numOfOutwardArrows = 2;
 	}
 }
 	

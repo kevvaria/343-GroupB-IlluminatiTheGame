@@ -9,6 +9,7 @@ public class AmericanAutoduelAssociation extends GroupCard {
 		addAlignment(Alignments.Weird);
 		
 		hasRightArrow = true;
+		numOfOutwardArrows = 1;
 	}
 
 }

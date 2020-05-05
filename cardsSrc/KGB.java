@@ -8,5 +8,6 @@ public class KGB extends GroupCard {
             addAlignment(Alignments.Violent);
 
             hasBottomArrow = true;
+            numOfOutwardArrows = 1;
         }
     }

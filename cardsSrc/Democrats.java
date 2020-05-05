@@ -8,5 +8,6 @@ public class Democrats extends GroupCard {
 		
 		hasTopArrow = true;
 		hasRightArrow = true;
+		numOfOutwardArrows = 2;
 	}
 }

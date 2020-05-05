@@ -9,6 +9,7 @@ public class FiendishFluidators extends GroupCard {
 		
 		hasTopArrow = true;
 		hasRightArrow = true;
+		numOfOutwardArrows = 2;
 	}
 	
 }

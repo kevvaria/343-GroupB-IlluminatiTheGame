@@ -6,6 +6,7 @@ public class RobotSeaMonsters extends GroupCard{
 		super("RobotSeaMonsters", -1, -1, 6, 2);
 		addAlignment(Alignments.Violent);
 		addAlignment(Alignments.Communist);
+		numOfOutwardArrows = 0;
 	}
 	}
 	

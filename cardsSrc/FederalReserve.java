@@ -7,6 +7,7 @@ public class FederalReserve extends GroupCard {
 		
 		hasTopArrow = true;
 		hasRightArrow = true;
+		numOfOutwardArrows = 2;
 	}
 	
 }

@@ -7,5 +7,6 @@ public class TobaccoAndLiquorCompanies extends GroupCard{
 
 		hasLeftArrow = true;
 		hasTopArrow = true;
+		numOfOutwardArrows = 2;
 	}
 }

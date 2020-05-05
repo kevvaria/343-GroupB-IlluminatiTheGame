@@ -9,6 +9,7 @@ public class InternationalCocaineSmugglers extends GroupCard{
 		hasTopArrow = true;
 		hasRightArrow = true;
 		hasBottomArrow = true;
+		numOfOutwardArrows = 3;
 	}
 	
 }

@@ -7,6 +7,7 @@ public class EmptyVee extends GroupCard {
 
 		hasLeftArrow = true;
 		hasBottomArrow = true;
+		numOfOutwardArrows = 2;
 	}
 }
 	

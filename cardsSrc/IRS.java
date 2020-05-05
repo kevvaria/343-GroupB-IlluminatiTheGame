@@ -9,6 +9,7 @@ public class IRS extends GroupCard{
 		
 		hasTopArrow = true;
 		hasBottomArrow = true;
+		numOfOutwardArrows = 2;
 	}
 	
 }

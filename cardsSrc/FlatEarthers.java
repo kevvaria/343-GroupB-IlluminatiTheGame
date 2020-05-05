@@ -8,6 +8,7 @@ public class FlatEarthers extends GroupCard {
 		addAlignment(Alignments.Conservative);
 		
 		hasLeftArrow = true;
+		numOfOutwardArrows = 1;
 	}
 	
 }

@@ -13,6 +13,7 @@ public abstract class IlluminatiCard extends GroupCard {
 		this.hasRightArrow = true;
 		this.hasBottomArrow = true;
 		this.hasTopArrow = true;
+		numOfOutwardArrows = 4;
 	}
 	
 	public void addIncome() {

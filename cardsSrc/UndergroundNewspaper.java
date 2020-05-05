@@ -7,5 +7,6 @@ public class UndergroundNewspaper extends GroupCard{
 		addAlignment(Alignments.Media); 
 
 		hasTopArrow = true;
+		numOfOutwardArrows = 1;
 	}
 }

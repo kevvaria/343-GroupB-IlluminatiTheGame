@@ -7,6 +7,7 @@ public class Tabloids extends GroupCard{
 		addAlignment(Alignments.Weird);
 		
 		hasTopArrow = true;
+		numOfOutwardArrows = 1;
 	}
 }
 	

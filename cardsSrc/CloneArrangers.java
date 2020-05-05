@@ -12,5 +12,6 @@ public class CloneArrangers extends GroupCard {
 		
 		hasRightArrow = true;
 		hasBottomArrow = true;
+		numOfOutwardArrows = 2;
 	}
 }

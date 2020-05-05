@@ -7,5 +7,6 @@ public class NuclearPowerCompanies extends GroupCard{
 		addAlignment(Alignments.Conservative);
 		
 		hasLeftArrow = true;
+		numOfOutwardArrows = 1;
 	}
 }

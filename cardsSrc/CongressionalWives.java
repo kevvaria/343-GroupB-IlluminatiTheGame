@@ -8,6 +8,7 @@ public class CongressionalWives extends GroupCard {
 		addAlignment(Alignments.Conservative);
 		
 		hasRightArrow = true;
+		numOfOutwardArrows = 1;
 	}
 
 }

@@ -11,6 +11,7 @@ public class NewYork extends GroupCard{
 		hasTopArrow = true;
 		hasLeftArrow = true;
 		hasBottomArrow = true;
+		numOfOutwardArrows = 3;
 	}
 }
 	

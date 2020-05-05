@@ -6,5 +6,6 @@ public class VideoGames extends GroupCard{
 		addAlignment(Alignments.Media);
 		
 		hasBottomArrow = true;
+		numOfOutwardArrows = 1;
 	}
 }

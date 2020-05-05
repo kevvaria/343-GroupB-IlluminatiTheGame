@@ -7,6 +7,7 @@ public class FnordMotorCompany extends GroupCard {
 		addAlignment(Alignments.Peaceful);
 		
 		hasRightArrow = true;
+		numOfOutwardArrows = 1;
 	}
 	
 }

@@ -8,6 +8,7 @@ public class MultinationalOilCompanies extends GroupCard{
 		hasTopArrow = true;
 		hasRightArrow = true;
 		hasBottomArrow = true;
+		numOfOutwardArrows = 3;
 	}
 }
 	

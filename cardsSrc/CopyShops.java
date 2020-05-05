@@ -7,6 +7,7 @@ public class CopyShops extends GroupCard {
 		addAlignment(Alignments.Peaceful);
 
 		hasLeftArrow = true;
+		numOfOutwardArrows = 1;
 	}
 	}
 	

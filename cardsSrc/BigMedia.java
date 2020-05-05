@@ -12,5 +12,6 @@ public class BigMedia extends GroupCard {
 		hasTopArrow = true;
 		hasRightArrow = true;
 		hasBottomArrow = true;
+		numOfOutwardArrows = 3;
 	}
 }

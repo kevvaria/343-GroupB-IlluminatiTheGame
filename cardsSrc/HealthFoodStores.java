@@ -7,6 +7,7 @@ public class HealthFoodStores extends GroupCard{
 		addAlignment(Alignments.Liberal);
 		
 		hasBottomArrow = true;
+		numOfOutwardArrows = 1;
 	}
 	
 }

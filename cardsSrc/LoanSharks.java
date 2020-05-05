@@ -8,6 +8,7 @@ public class LoanSharks extends GroupCard{
 		addAlignment(Alignments.Criminal);
 		
 		hasRightArrow = true;
+		numOfOutwardArrows = 1;
 	}
 	
 }

@@ -9,6 +9,7 @@ public class CFLAIO extends GroupCard {
 		hasBottomArrow = true;
 		hasTopArrow = true;
 		hasLeftArrow = true;
+		numOfOutwardArrows = 3;
 
 	}
 }

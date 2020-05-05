@@ -8,5 +8,6 @@ public class SouthAmericanNazis extends GroupCard {
 
         hasTopArrow = true;
         hasBottomArrow = true;
+        numOfOutwardArrows = 2;
     }
 }

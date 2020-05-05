@@ -9,6 +9,7 @@ public class Republicans extends GroupCard{
 		hasTopArrow = true;
 		hasLeftArrow = true;
 		hasBottomArrow = true;
+		numOfOutwardArrows = 3;
 	}
 }
 	

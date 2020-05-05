@@ -7,5 +7,6 @@ public class OrbitalMindControlLasers extends GroupCard{
 		
 		hasTopArrow = true;
 		hasRightArrow = true;
+		numOfOutwardArrows = 2;
 	}
 }

@@ -7,6 +7,7 @@ public class Feminists extends GroupCard {
 		addAlignment(Alignments.Liberal);
 
 		hasBottomArrow = true;
+		numOfOutwardArrows = 1;
 	}
 	
 }

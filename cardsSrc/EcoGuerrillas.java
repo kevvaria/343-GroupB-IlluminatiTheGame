@@ -7,6 +7,7 @@ public class EcoGuerrillas extends GroupCard {
 		addAlignment(Alignments.Weird);
 		addAlignment(Alignments.Liberal);
 		addAlignment(Alignments.Violent);
+		numOfOutwardArrows = 0;
 	}
 	
 }

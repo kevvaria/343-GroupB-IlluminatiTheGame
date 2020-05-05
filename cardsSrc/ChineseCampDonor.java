@@ -8,6 +8,7 @@ public class ChineseCampDonor extends GroupCard {
 
 		hasBottomArrow = true;
 		hasTopArrow = true;
+		numOfOutwardArrows = 2;
 	}
 	}
 	

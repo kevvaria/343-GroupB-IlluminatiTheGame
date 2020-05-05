@@ -6,6 +6,7 @@ public class PostOffice extends GroupCard{
 		super("Post Office", 4, 3, 3, -1);
 		
 		hasTopArrow = true;
+		numOfOutwardArrows = 1;
 	}
 }
 	

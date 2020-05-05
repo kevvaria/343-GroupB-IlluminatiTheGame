@@ -9,6 +9,7 @@ public class ComicBooks extends GroupCard {
 		addAlignment(Alignments.Media);
 		
 		hasTopArrow = true;
+		numOfOutwardArrows = 1;
 	}
 
 }

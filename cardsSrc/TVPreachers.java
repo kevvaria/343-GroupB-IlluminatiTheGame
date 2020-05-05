@@ -8,5 +8,6 @@ public class TVPreachers extends GroupCard{
 		
 		hasBottomArrow = true;
 		hasLeftArrow = true;
+		numOfOutwardArrows = 2;
 	}
 }

@@ -7,6 +7,7 @@ public class FastFoodChains extends GroupCard {
 		addAlignment(Alignments.Straight);
 		
 		hasBottomArrow = true;
+		numOfOutwardArrows = 1;
 	}
 
 }

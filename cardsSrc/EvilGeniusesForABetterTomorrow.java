@@ -7,6 +7,7 @@ public class EvilGeniusesForABetterTomorrow extends GroupCard {
 		addAlignment(Alignments.Weird);
 		addAlignment(Alignments.Violent);
 
+		numOfOutwardArrows = 0;
 	}
 
 }

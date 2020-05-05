@@ -7,5 +7,6 @@ public class Libertarians extends GroupCard{
 		addAlignment(Alignments.Fanatic);
 		
 		hasTopArrow = true;
+		numOfOutwardArrows = 1;
 	}
 }

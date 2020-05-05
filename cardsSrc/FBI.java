@@ -9,6 +9,7 @@ public class FBI extends GroupCard {
 		
 		hasTopArrow = true;
 		hasBottomArrow = true;
+		numOfOutwardArrows = 2;
 	}
 
 }
