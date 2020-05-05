@@ -13,12 +13,16 @@ public class Person {
     private ArrayList<Card> playerHand;
     private ArrayList<SpecialCard> specialCards;
     private int numOfRegActionsLeft;
+    protected PowerStructure pStructure;
 
-    public Person(String username){
+
+    Person(String username){
         this.username = username;
         numOfRegActionsLeft = 2;
         playerHand = new ArrayList<>();
         specialCards = new ArrayList<>();
+
+
     }
 
     public String getUsername() {
@@ -64,6 +68,8 @@ public class Person {
     public void setNumOfRegActionsLeft(int numOfRegActionsLeft) {
         this.numOfRegActionsLeft = numOfRegActionsLeft;
     }
+
+
 
     public int rollDice(){
         //generate random number between 1 and 12. NO 0's
