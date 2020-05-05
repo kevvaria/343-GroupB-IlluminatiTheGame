@@ -231,10 +231,7 @@ public class Controller implements Initializable {
                 mainTabbedPane.getSelectionModel().select(0);
                 gamePlay.initGame();
                 gamePlay.assignIlluminatiCards();
-                gamePlay.drawCard();
-                gamePlay.drawCard();
-                gamePlay.drawCard();
-                gamePlay.drawCard();
+                gamePlay.initialUncontrolled();
                 gamePlay.setCurrentPlayer(gamePlay.getPlayerList().get(0));
                 //TO-DO: Output each players illuminati card before starting first round
                 updateOpponentsUI();
@@ -265,9 +262,9 @@ public class Controller implements Initializable {
                         + " the group: "  + groupCardToGiveCB.getValue() + "\n");
                 System.out.println("Group Actions Button - Clicked");
                 System.out.println("- Action: " + groupChoiceBox.getValue() + "\n"
-                            + "- Selected group: " + groupCardToGiveCB.getValue() + "\n"
-                            + "- Target Player: " + groupTargetPlayerCB.getValue() + "\n"
-                            + "- Target Card: " + groupTargetGroupCB.getValue() + "\n");
+                        + "- Selected group: " + groupCardToGiveCB.getValue() + "\n"
+                        + "- Target Player: " + groupTargetPlayerCB.getValue() + "\n"
+                        + "- Target Card: " + groupTargetGroupCB.getValue() + "\n");
                 //call group method here. Pass in action type, card to give, target player, target group
             }
         });
@@ -291,7 +288,7 @@ public class Controller implements Initializable {
                         + transferMoneyPlayerCB.getValue() + ": " + transferAmountSlider.getValue() + "MB's\n");
                 System.out.println("Give Money Button - Clicked");
                 System.out.println("- Recipient: " + transferMoneyPlayerCB.getValue() + "\n"
-                                + "- Amount: " + transferAmountSlider.getValue() + "\n");
+                        + "- Amount: " + transferAmountSlider.getValue() + "\n");
             }
         });
 

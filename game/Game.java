@@ -123,9 +123,9 @@ public class Game {
     }
 
     public void initialUncontrolled() {
-        Card drawnCard = deck.remove(0);
         while (uncontrolledGroupsPile.size()<4)
         {
+            Card drawnCard = deck.remove(0);
             if (drawnCard instanceof SpecialCard)
             {
                 deck.add(drawnCard);
@@ -136,8 +136,8 @@ public class Game {
                 GroupCard gC = (GroupCard) drawnCard;
                 uncontrolledGroupsPile.add(gC);
             }
-
         }
+        System.out.println("Initial Uncontrolled Pile: " + uncontrolledGroupsPile);
     }
 
     public void drawCard(){
@@ -406,6 +406,8 @@ public class Game {
         deck.add(new SwissBankAccount());
         deck.add(new WhisperingCampaign());
         deck.add(new WhiteCollarCrime());
+
+        Collections.shuffle(deck);
     }
 
     public ArrayList<String> resetOpponents(){
