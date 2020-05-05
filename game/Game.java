@@ -204,15 +204,24 @@ public class Game {
         }
     }
 
-    public void attack(String attackType, GroupCard attackingGroup, GroupCard targetGroup){
 
+    public void attack(String attackType, String attacking, String target, String opName){
+        Person opponent = stringToPerson(opName);
+        GroupCard attackingGroup = stringToGroupCard(attacking,getCurrentPlayer());
+        GroupCard targetGroup;
+
+        if(opName.equalsIgnoreCase("Uncontrolled") ) {
+            targetGroup = stringToGroupCard(target,uncontrolledGroupsPile);
+        }else {
+            targetGroup = stringToGroupCard(target, opponent);
+        }
 
         if(attackType.equalsIgnoreCase("control")){
             int maxControlTotal = attackingGroup.getPower() - targetGroup.getResistance();
             int numberRolled = (int) (Math.random() * (12-0+1)+1);
             if(numberRolled <= maxControlTotal && numberRolled <11)
                 if(uncontrolledGroupsPile.contains(targetGroup))
-                    currentPlayer.pStructure.findPowerStructure(currentPlayer.pStructure, attackingGroup, targetGroup, 0);
+                    currentPlayer.pStructure.findPowerStructure(currentPlayer.pStructure, attackingGroup, targetGroup, 0); //add
                 else
                 {
                     for(int k = 0; k < playerList.size(); k++)
@@ -459,7 +468,42 @@ public class Game {
         }
         return opponents;
     }
+    //method to convert string to GroupCard
+    //Parameter is String and Person
+    public GroupCard stringToGroupCard(String name,Person p){
+        GroupCard card = null;
 
+        for (PowerStructure crd : p.pStructure.getChildren()) {
+            if(crd.LABEL.getName().equals(name)){
+                card = (GroupCard) crd.LABEL;
+                break;
+            }
+        }
+        return card;
+    }
+    //method to convert string to GroupCard.
+    //Parameter is String and ArrayList of GroupCards
+    public GroupCard stringToGroupCard(String name, ArrayList<GroupCard> a){
+        GroupCard card = null;
+
+        for (GroupCard crd : a) {
+            if(crd.getName().equals(name)){
+                card = crd;
+                break;
+            }
+        }
+        return card;
+    }
+
+    public Person stringToPerson(String name){
+        Person player = null;
+        for(Person person: playerList){
+            if(person.getUsername().equals(name)){
+                player = person;
+            }
+        }
+        return player;
+    }
 
 
 //
