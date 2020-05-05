@@ -60,7 +60,7 @@ public class PowerStructure {
             System.out.print("   ");
         }
 
-        System.out.println(illuminati.LABEL);
+        //System.out.println(illuminati.LABEL);
 
         for (PowerStructure child : illuminati.getChildren()) {
             if(child.LABEL==attackingCard)
@@ -68,20 +68,78 @@ public class PowerStructure {
                 addChild(defendingCard);
 
             }
-            printUtil(child, depth + 1);
+            //printUtil(child, depth + 1);
         }
 
 
     }
+    public PowerStructure returnPowerStructure(PowerStructure illuminati, GroupCard targetCard, int depth)
+    {
+        for (int i = 0; i < depth; ++i) {
+            System.out.print("   ");
+        }
+
+        System.out.println(illuminati.LABEL);
+
+        for (PowerStructure child : illuminati.getChildren()) {
+            if(child.LABEL==targetCard)
+            {
+               return child;
+
+            }
+            printUtil(child, depth + 1);
+        }
+        return illuminati;
+
+
+    }
+    public PowerStructure removePowerStructure(PowerStructure illuminati, GroupCard targetCard, int depth)
+    {
+        PowerStructure newIlluminati = new PowerStructure(illuminati.LABEL, 4);
+        for (int i = 0; i < depth; ++i) {
+            System.out.print("   ");
+        }
+
+        //System.out.println(illuminati.LABEL);
+        //ArrayList<PowerStructure> returningList = new ArrayList<>();
+
+
+        for (PowerStructure child : illuminati.getChildren()) {
+            if(child.LABEL==targetCard)
+            {
+               return newIlluminati;
+
+            }
+            addChild(child);
+            //printUtil(child, depth + 1);
+        }
+        return null;
+
+
+    }
+
     public static void main(String[] args) {
         int n = 3;
+        Person hero = new Person("hero");
+
+        Game games = new Game();
+
         Card card = new TheBavarianIlluminati();
         GroupCard gC = new ThePhoneCompany();
         GroupCard gCard = new Democrats();
+        games.uncontrolledGroupsPile.add(gCard);
         PowerStructure root = new PowerStructure(card, n);
+        String attack = "control";
+        hero.pStructure = root;
+        //String username1 = "a";
+        String username2 = "uncontrolled";
+        games.setCurrentPlayer(hero);
 
         root.addChild(gC);
-        root.findPowerStructure(root,gC,gCard,0);
+        //root.findPowerStructure(root,gC,gCard,0);
+
+        games.attack(attack,gC.getName(),gCard.getName(),username2);
+
 
 //        root.getChild(0).addChild("Elements");
 //        root.getChild(0).getChild(0).addChild("Metals");
