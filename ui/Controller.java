@@ -236,6 +236,7 @@ public class Controller implements Initializable {
                 gamePlay.drawCard();
                 gamePlay.drawCard();
                 gamePlay.setCurrentPlayer(gamePlay.getPlayerList().get(0));
+                //TO-DO: Output each players illuminati card before starting first round
                 updateOpponentsUI();
             }
         });
@@ -243,6 +244,10 @@ public class Controller implements Initializable {
         attackBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                gameplayTA.appendText(gamePlay.getCurrentPlayer().getUsername() + " is attacking to "
+                        + attackChoiceBox.getValue() + "\n"
+                        + "- Attacking Group: " + attackingCardCB.getValue()  + "\n"
+                        + "- Target Group: " + attackPlayerCB.getValue() + "'s " + attackTargetGroupCB.getValue() + "\n");
                 System.out.println("Attack Button - Clicked");
                 System.out.println("- Attack to " + attackChoiceBox.getValue() + "\n"
                         + " from " + attackingCardCB.getValue() + "\n"
@@ -255,6 +260,9 @@ public class Controller implements Initializable {
         groupActionBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                gameplayTA.appendText(gamePlay.getCurrentPlayer().getUsername()
+                        + " decided to " + groupChoiceBox.getValue()
+                        + " the group: "  + groupCardToGiveCB.getValue() + "\n");
                 System.out.println("Group Actions Button - Clicked");
                 System.out.println("- Action: " + groupChoiceBox.getValue() + "\n"
                             + "- Selected group: " + groupCardToGiveCB.getValue() + "\n"
@@ -267,6 +275,8 @@ public class Controller implements Initializable {
         specialCardActionBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                gameplayTA.appendText(gamePlay.getCurrentPlayer().getUsername() + " "
+                        + specialCardChoiceBox.getValue() + "d " + specialCardToUseCB.getValue() + "\n");
                 System.out.println("Special Card Actions Button - Clicked");
                 System.out.println("- Action: " + specialCardChoiceBox.getValue() + "\n"
                         + "- Selected Card: " + specialCardToUseCB.getValue() + "\n"
@@ -277,6 +287,8 @@ public class Controller implements Initializable {
         giveMoneyActionBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                gameplayTA.appendText(gamePlay.getCurrentPlayer().getUsername() + " gave "
+                        + transferMoneyPlayerCB.getValue() + ": " + transferAmountSlider.getValue() + "MB's\n");
                 System.out.println("Give Money Button - Clicked");
                 System.out.println("- Recipient: " + transferMoneyPlayerCB.getValue() + "\n"
                                 + "- Amount: " + transferAmountSlider.getValue() + "\n");
@@ -286,6 +298,10 @@ public class Controller implements Initializable {
         tradeActionBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                gameplayTA.appendText(gamePlay.getCurrentPlayer().getUsername() + " traded "
+                        + tradeGiveCardCB.getValue() + " with "
+                        + tradePersonCB.getValue() + "'s "
+                        + tradeGetCardCB.getValue() + "\n");
                 System.out.println("Trade Button - Clicked");
                 System.out.println("- Card to trade: " + tradeGiveCardCB.getValue()  + "\n"
                         + "- Player to trade with: " + tradePersonCB.getValue()  + "\n"
@@ -296,7 +312,7 @@ public class Controller implements Initializable {
         passTurnBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Pass Button - Clicked\n");
+                gameplayTA.appendText(gamePlay.getCurrentPlayer().getUsername() + " passes their turn\n");
                 gamePlay.passTurn();
                 updateOpponentsUI();
             }
@@ -305,7 +321,7 @@ public class Controller implements Initializable {
         endTurnBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("End Turn Button - Clicked\n");
+                gameplayTA.appendText(gamePlay.getCurrentPlayer().getUsername() + " passes their turn\n");
                 gamePlay.endTurn();
                 updateOpponentsUI();
             }
@@ -323,6 +339,7 @@ public class Controller implements Initializable {
         playerToViewChoiceBox.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                gameplayTA.appendText("Viewing: " + playerToViewChoiceBox.getValue() + "'s cards\n");
                 System.out.println("Viewing: " + playerToViewChoiceBox.getValue() + "'s Hand\n");
                 playerToViewChoiceBox.setTooltip(new Tooltip("Viewing: "
                         + playerToViewChoiceBox.getValue() + "'s Structure"));
@@ -385,6 +402,8 @@ public class Controller implements Initializable {
     }
 
     public void updateOpponentsUI(){
+        gameplayTA.appendText(gamePlay.getCurrentPlayer().getUsername() + "'s Turn - "
+                + gamePlay.getCurrentPlayer().getIlluminatiCard().getName() + "\n");
         attackPlayerCB.getItems().clear();
         groupTargetPlayerCB.getItems().clear();
         specialTargetPlayerCB.getItems().clear();
