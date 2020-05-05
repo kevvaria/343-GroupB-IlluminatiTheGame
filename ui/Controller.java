@@ -119,7 +119,6 @@ public class Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         //UI Initial setup
-//        gamePlay.test();
         startGameBtn.setDisable(true);
         attackChoiceBox.getItems().add("Control");
         attackChoiceBox.getItems().add("Neutralize");
@@ -231,10 +230,7 @@ public class Controller implements Initializable {
                 mainTabbedPane.getSelectionModel().select(0);
                 gamePlay.initGame();
                 gamePlay.assignIlluminatiCards();
-                gamePlay.drawCard();
-                gamePlay.drawCard();
-                gamePlay.drawCard();
-                gamePlay.drawCard();
+                gamePlay.initialUncontrolled();
                 gamePlay.setCurrentPlayer(gamePlay.getPlayerList().get(0));
                 //TO-DO: Output each players illuminati card before starting first round
                 updateOpponentsUI();
@@ -265,9 +261,9 @@ public class Controller implements Initializable {
                         + " the group: "  + groupCardToGiveCB.getValue() + "\n");
                 System.out.println("Group Actions Button - Clicked");
                 System.out.println("- Action: " + groupChoiceBox.getValue() + "\n"
-                            + "- Selected group: " + groupCardToGiveCB.getValue() + "\n"
-                            + "- Target Player: " + groupTargetPlayerCB.getValue() + "\n"
-                            + "- Target Card: " + groupTargetGroupCB.getValue() + "\n");
+                        + "- Selected group: " + groupCardToGiveCB.getValue() + "\n"
+                        + "- Target Player: " + groupTargetPlayerCB.getValue() + "\n"
+                        + "- Target Card: " + groupTargetGroupCB.getValue() + "\n");
                 //call group method here. Pass in action type, card to give, target player, target group
             }
         });
@@ -291,7 +287,7 @@ public class Controller implements Initializable {
                         + transferMoneyPlayerCB.getValue() + ": " + transferAmountSlider.getValue() + "MB's\n");
                 System.out.println("Give Money Button - Clicked");
                 System.out.println("- Recipient: " + transferMoneyPlayerCB.getValue() + "\n"
-                                + "- Amount: " + transferAmountSlider.getValue() + "\n");
+                        + "- Amount: " + transferAmountSlider.getValue() + "\n");
             }
         });
 
@@ -330,11 +326,10 @@ public class Controller implements Initializable {
         forfeitBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Forfiet Button - Clicked \n");
+                System.out.println("Forfeit Button - Clicked \n");
                 //reset all choice boxes to null, remove the player from arraylist, and repopulate the choice boxes
             }
         });
-
 
         playerToViewChoiceBox.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -375,6 +370,7 @@ public class Controller implements Initializable {
         System.out.println("UI status: Reset Complete\n");
     }
 
+
     public void addPlayerUI(){
         System.out.println("Add Player Button - Clicked");
         String username = usernameTF.getText();
@@ -403,6 +399,7 @@ public class Controller implements Initializable {
         playerToViewChoiceBox.setTooltip(new Tooltip("View: " + playerToViewChoiceBox.getValue() + "'s Structure"));
     }
 
+
     public void updateOpponentsUI(){
         gameplayTA.appendText(gamePlay.getCurrentPlayer().getUsername() + "'s Turn - "
                 + gamePlay.getCurrentPlayer().getIlluminatiCard().getName() + "\n");
@@ -426,6 +423,6 @@ public class Controller implements Initializable {
         specialTargetPlayerCB.getSelectionModel().select(0);
         transferMoneyPlayerCB.getSelectionModel().select(0);
         tradePersonCB.getSelectionModel().select(0);
-
     }
+
 }
