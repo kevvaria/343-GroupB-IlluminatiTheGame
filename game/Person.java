@@ -16,7 +16,7 @@ public class Person {
     protected PowerStructure pStructure;
 
 
-    Person(String username){
+    public Person(String username){
         this.username = username;
         numOfRegActionsLeft = 2;
         playerHand = new ArrayList<>();

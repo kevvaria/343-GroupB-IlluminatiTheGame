@@ -14,6 +14,7 @@ public class Game {
     ArrayList<GroupCard> uncontrolledGroupsPile;
     Person currentPlayer;
     int playerCount = 0;
+    PowerStructure powerStructure;
 
     public Game(){
         illuminatiCards = new ArrayList<IlluminatiCard>();
@@ -23,6 +24,7 @@ public class Game {
         uncontrolledGroupsPile = new ArrayList<>();
         //currentPlayer = new Person(get);
         int playerCount = 0;
+
     }
 
     public ArrayList<IlluminatiCard> getIlluminatiCards() {
@@ -76,10 +78,12 @@ public class Game {
     public void initGame(){
 
         //add each card to the deck
-        resetGameData();
+//       loadCards();
 
         //deck.add(new Yuppies());
         Person littleMan = new Person("Beginner");
+
+
 
         //shuffle deck
         //add players to the gameboard
@@ -101,16 +105,17 @@ public class Game {
         }
         return playerAdded;
     }
-
-    public void collectIncome(Person currentPlayer) {
+    public void collectIncome(Person currentPlayer)
+    {
         currentPlayer.getIlluminatiCard().addIncome();
         //add group cards to the list and check in list for income
     }
 
     public void shuffleDeck(){
+        //deck.shuffle();
         Collections.shuffle(deck);
-    }
 
+    }
     public void shufflePlayOfOrder(){
 
         Collections.shuffle(playerList);
@@ -122,10 +127,12 @@ public class Game {
 
     }
 
-    public void initialUncontrolled() {
+
+    public void initialUncontrolled()
+    {
+        Card drawnCard = deck.remove(0);
         while (uncontrolledGroupsPile.size()<4)
         {
-            Card drawnCard = deck.remove(0);
             if (drawnCard instanceof SpecialCard)
             {
                 deck.add(drawnCard);
@@ -136,8 +143,8 @@ public class Game {
                 GroupCard gC = (GroupCard) drawnCard;
                 uncontrolledGroupsPile.add(gC);
             }
+
         }
-        System.out.println("Initial Uncontrolled Pile: " + uncontrolledGroupsPile);
     }
 
     public void drawCard(){
@@ -145,7 +152,7 @@ public class Game {
         //if card is specialCard, add to their inventory.
         //else push to uncontrolled deck
         //Card drawnCard = deck.get(0);
-        Card drawnCard = deck.remove(0);
+         Card drawnCard = deck.remove(0);
         if (drawnCard instanceof SpecialCard)
         {
             currentPlayer.setCardPlayerHand(drawnCard);
@@ -163,8 +170,8 @@ public class Game {
 
 
     }
-
-    public void drawUncontrolled() {
+    public void drawUncontrolled()
+    {
         Card drawnCard = deck.remove(0);
         while (uncontrolledGroupsPile.size()<2)
         {
@@ -184,6 +191,7 @@ public class Game {
         }
     }
 
+
     public void assignIlluminatiCards(){
         //for each player in the playerList, assign an Illuminati Card using the Person.setter()
         int i = 0;
@@ -191,21 +199,56 @@ public class Game {
         for(Person p:playerList)
         {
             p.setIlluminatiCard(illuminatiCards.get(i));
+            p.pStructure = new PowerStructure(p.getIlluminatiCard(),4);
             i++;
         }
     }
 
-    public void attack(String attackType, String attackingGroup, String targetGroup){
+    public void attack(String attackType, GroupCard attackingGroup, GroupCard targetGroup){
+
+
         if(attackType.equalsIgnoreCase("control")){
+            int maxControlTotal = attackingGroup.getPower() - targetGroup.getResistance();
+            int numberRolled = (int) (Math.random() * (12-0+1)+1);
+            if(numberRolled <= maxControlTotal && numberRolled <11)
+                if(uncontrolledGroupsPile.contains(targetGroup))
+                    currentPlayer.pStructure.findPowerStructure(currentPlayer.pStructure, attackingGroup, targetGroup, 0);
+                else
+                {
+                    for(int k = 0; k < playerList.size(); k++)
+                    {
+                        Person p = playerList.get(k);
+                        PowerStructure newPlans =p.pStructure.returnPowerStructure(p.pStructure,targetGroup,0);
+                        for(PowerStructure power : newPlans.getChildren())
+                        {
+                            GroupCard c = (GroupCard) power.LABEL;
+                            uncontrolledGroupsPile.add(c);
+                        }
+
+                        p.pStructure.removePowerStructure(p.pStructure,targetGroup,0);
+                    }
+                }
+
+
+
+
 
         }
         else if(attackType.equalsIgnoreCase("neutralize")){
+            int maxNeutralizeTotal = (attackingGroup.getPower() + 6) - targetGroup.getResistance();
+            int numberRolled = (int) (Math.random() * (12-0+1)+1);
+            if(numberRolled <= maxNeutralizeTotal && numberRolled <11)
+            {
+                uncontrolledGroupsPile.add(targetGroup);
+
+            }
 
         }
         else{
 
         }
     }
+
 
     public void groupAction(String actionType, String cardToGive, String targetPlayer, String targetGroup){
         //if actionType.equalsLowercase("give) and targetGroup.hasOutwardArrow()
@@ -251,7 +294,11 @@ public class Game {
     public void endTurn(){
         //currentPlayer updates to the next player in the playerList
         //call on next player to start their turn by: startNextTurn()
-        playerCount = (playerCount + 1) % playerList.size();
+        int actions = currentPlayer.getNumOfRegActionsLeft();
+        if(actions != 0)
+            //prompt message asking player to continue
+        System.out.println(currentPlayer.getUsername() + "'s turn has ended");
+        playerCount = playerCount + 1;
         if(playerCount == playerList.size())
             playerCount = 0;
         currentPlayer = playerList.get(playerCount);
@@ -286,7 +333,6 @@ public class Game {
         else
             endTurn();
     }
-
     void loadCards(){
         // Illuminati Cards
         illuminatiCards.add(new TheDiscordianSociety());
@@ -384,6 +430,8 @@ public class Game {
         deck.add(new VideoGames());
         deck.add(new Yuppies());
 
+
+
         // Ability Cards
         deck.add(new Assassination());
         deck.add(new Bribery());
@@ -400,8 +448,6 @@ public class Game {
         deck.add(new SwissBankAccount());
         deck.add(new WhisperingCampaign());
         deck.add(new WhiteCollarCrime());
-
-        Collections.shuffle(deck);
     }
 
     public ArrayList<String> resetOpponents(){
@@ -414,21 +460,15 @@ public class Game {
         return opponents;
     }
 
-    public void resetGameData(){
-        illuminatiCards.clear();
-        deck.clear();
-        uncontrolledGroupsPile.clear();
-        System.out.println("Decks Cleared\n\n");
-        playerCount = 0;
-        currentPlayer = null;
-        loadCards();
-    }
 
-    public void test() {
-        System.out.println("Testing");
+
+//
+//    public void test() {
+//        System.out.println("Testing");
 //        illuminatiCards.add(new TheUFOs());
 //        System.out.println("UFO: " + illuminatiCards.get(0).toString());
-        drawCard();
-
-    }
+//        drawCard();
+//
+//
+//    }
 }

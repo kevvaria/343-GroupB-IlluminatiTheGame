@@ -73,6 +73,51 @@ public class PowerStructure {
 
 
     }
+    public PowerStructure returnPowerStructure(PowerStructure illuminati, GroupCard targetCard, int depth)
+    {
+        for (int i = 0; i < depth; ++i) {
+            System.out.print("   ");
+        }
+
+        System.out.println(illuminati.LABEL);
+
+        for (PowerStructure child : illuminati.getChildren()) {
+            if(child.LABEL==targetCard)
+            {
+               return child;
+
+            }
+            printUtil(child, depth + 1);
+        }
+        return illuminati;
+
+
+    }
+    public PowerStructure removePowerStructure(PowerStructure illuminati, GroupCard targetCard, int depth)
+    {
+        PowerStructure newIlluminati = new PowerStructure(illuminati.LABEL, 4);
+        for (int i = 0; i < depth; ++i) {
+            System.out.print("   ");
+        }
+
+        //System.out.println(illuminati.LABEL);
+        //ArrayList<PowerStructure> returningList = new ArrayList<>();
+
+
+        for (PowerStructure child : illuminati.getChildren()) {
+            if(child.LABEL==targetCard)
+            {
+               return newIlluminati;
+
+            }
+            addChild(child);
+            //printUtil(child, depth + 1);
+        }
+        return null;
+
+
+    }
+
     public static void main(String[] args) {
         int n = 3;
         Card card = new TheBavarianIlluminati();
