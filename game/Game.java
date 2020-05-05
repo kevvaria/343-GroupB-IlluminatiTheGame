@@ -191,6 +191,7 @@ public class Game {
         for(Person p:playerList)
         {
             p.setIlluminatiCard(illuminatiCards.get(i));
+            i++;
         }
     }
 
@@ -300,6 +301,7 @@ public class Game {
         illuminatiCards.add(new TheGnomesOfZurich());
         illuminatiCards.add(new TheBavarianIlluminati());
         illuminatiCards.add(new TheBermudaTriangle());
+        Collections.shuffle(illuminatiCards);
 
         // Group Cards
         deck.add(new AmericanAutoduelAssociation());

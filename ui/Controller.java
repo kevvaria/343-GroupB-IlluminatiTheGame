@@ -362,6 +362,7 @@ public class Controller implements Initializable {
     public void resetGameUI(){
         //send all cards back to their decks
         mainMenuTA.clear();
+        gameplayTA.clear();
         playerToViewChoiceBox.getItems().clear();
         attackTargetGroupCB.getItems().clear();
         groupTargetPlayerCB.getItems().clear();
@@ -370,6 +371,7 @@ public class Controller implements Initializable {
         tradePersonCB.getItems().clear();
         usernameTF.setDisable(false);
         startGameBtn.setDisable(true);
+        gamePlay.setPlayerList(new ArrayList<>());
         System.out.println("UI status: Reset Complete\n");
     }
 
