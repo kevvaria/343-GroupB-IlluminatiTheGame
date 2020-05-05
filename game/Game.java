@@ -77,19 +77,9 @@ public class Game {
 
     public void initGame(){
 
-        //add each card to the deck
-//       loadCards();
 
-        //deck.add(new Yuppies());
-        Person littleMan = new Person("Beginner");
+        resetGameData();
 
-
-
-        //shuffle deck
-        //add players to the gameboard
-        //give each player an illuminati card
-        //give each player an initial balance based on their illuminati card
-        //grab 4 groupcards and place them on the board. All specialcards are left in the original deck.
     }
 
     public boolean addAPlayer(Person playerToAdd){
@@ -206,7 +196,7 @@ public class Game {
 
 
     public void attack(String attackType, String attacking, String target, String opName){
-        Person opponent = stringToPerson(opName);
+        Person opponent = stringToPerson(opName); // change the opponent from string to person
         GroupCard attackingGroup = stringToGroupCard(attacking,getCurrentPlayer());
         GroupCard targetGroup;
 
@@ -237,8 +227,6 @@ public class Game {
                         p.pStructure.removePowerStructure(p.pStructure,targetGroup,0);
                     }
                 }
-
-
 
 
 
@@ -438,6 +426,7 @@ public class Game {
         deck.add(new UndergroundNewspaper());
         deck.add(new VideoGames());
         deck.add(new Yuppies());
+        Collections.shuffle(deck);
 
 
 
@@ -459,15 +448,6 @@ public class Game {
         deck.add(new WhiteCollarCrime());
     }
 
-    public ArrayList<String> resetOpponents(){
-        ArrayList<String> opponents = new ArrayList<>();
-        for(Person person : playerList){
-            if(!person.getUsername().equals(currentPlayer.getUsername())){
-                opponents.add(person.getUsername());
-            }
-        }
-        return opponents;
-    }
     //method to convert string to GroupCard
     //Parameter is String and Person
     public GroupCard stringToGroupCard(String name,Person p){
@@ -505,6 +485,25 @@ public class Game {
         return player;
     }
 
+    public ArrayList<String> resetOpponents(){
+        ArrayList<String> opponents = new ArrayList<>();
+        for(Person person : playerList){
+            if(!person.getUsername().equals(currentPlayer.getUsername())){
+                opponents.add(person.getUsername());
+            }
+        }
+        return opponents;
+    }
+
+    public void resetGameData(){
+        illuminatiCards.clear();
+        deck.clear();
+        uncontrolledGroupsPile.clear();
+        System.out.println("Decks Cleared\n\n");
+        playerCount = 0;
+        currentPlayer = null;
+        loadCards();
+    }
 
 //
 //    public void test() {
