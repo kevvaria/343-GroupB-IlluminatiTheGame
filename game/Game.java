@@ -76,7 +76,7 @@ public class Game {
     public void initGame(){
 
         //add each card to the deck
-        loadCards();
+        resetGameData();
 
         //deck.add(new Yuppies());
         Person littleMan = new Person("Beginner");
@@ -251,11 +251,7 @@ public class Game {
     public void endTurn(){
         //currentPlayer updates to the next player in the playerList
         //call on next player to start their turn by: startNextTurn()
-        int actions = currentPlayer.getNumOfRegActionsLeft();
-        if(actions != 0)
-            //prompt message asking player to continue
-            System.out.println(currentPlayer.getUsername() + "'s turn has ended");
-        playerCount = playerCount + 1;
+        playerCount = (playerCount + 1) % playerList.size();
         if(playerCount == playerList.size())
             playerCount = 0;
         currentPlayer = playerList.get(playerCount);
@@ -388,8 +384,6 @@ public class Game {
         deck.add(new VideoGames());
         deck.add(new Yuppies());
 
-
-
         // Ability Cards
         deck.add(new Assassination());
         deck.add(new Bribery());
@@ -418,6 +412,16 @@ public class Game {
             }
         }
         return opponents;
+    }
+
+    public void resetGameData(){
+        illuminatiCards.clear();
+        deck.clear();
+        uncontrolledGroupsPile.clear();
+        System.out.println("Decks Cleared\n\n");
+        playerCount = 0;
+        currentPlayer = null;
+        loadCards();
     }
 
     public void test() {

@@ -119,7 +119,6 @@ public class Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         //UI Initial setup
-//        gamePlay.test();
         startGameBtn.setDisable(true);
         attackChoiceBox.getItems().add("Control");
         attackChoiceBox.getItems().add("Neutralize");
@@ -327,11 +326,10 @@ public class Controller implements Initializable {
         forfeitBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Forfiet Button - Clicked \n");
+                System.out.println("Forfeit Button - Clicked \n");
                 //reset all choice boxes to null, remove the player from arraylist, and repopulate the choice boxes
             }
         });
-
 
         playerToViewChoiceBox.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -372,6 +370,7 @@ public class Controller implements Initializable {
         System.out.println("UI status: Reset Complete\n");
     }
 
+
     public void addPlayerUI(){
         System.out.println("Add Player Button - Clicked");
         String username = usernameTF.getText();
@@ -400,6 +399,7 @@ public class Controller implements Initializable {
         playerToViewChoiceBox.setTooltip(new Tooltip("View: " + playerToViewChoiceBox.getValue() + "'s Structure"));
     }
 
+
     public void updateOpponentsUI(){
         gameplayTA.appendText(gamePlay.getCurrentPlayer().getUsername() + "'s Turn - "
                 + gamePlay.getCurrentPlayer().getIlluminatiCard().getName() + "\n");
@@ -423,6 +423,6 @@ public class Controller implements Initializable {
         specialTargetPlayerCB.getSelectionModel().select(0);
         transferMoneyPlayerCB.getSelectionModel().select(0);
         tradePersonCB.getSelectionModel().select(0);
-
     }
+
 }
