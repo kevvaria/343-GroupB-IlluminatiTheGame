@@ -53,6 +53,8 @@ public class Controller implements Initializable {
     @FXML
     private TextArea helpTextArea;
     @FXML
+    private TextArea powerStructureTA;
+    @FXML
     private TitledPane viewPlayersHandTP;
     @FXML
     private TitledPane attacksTP;
@@ -133,6 +135,7 @@ public class Controller implements Initializable {
         mainTabbedPane.getTabs().remove(gameplayTab);
 
         mainMenuTA.setWrapText(true);
+        powerStructureTA.setWrapText(false);
         helpTextArea.setWrapText(true);
 
         //setting tooltips for all buttons
@@ -185,6 +188,12 @@ public class Controller implements Initializable {
             public void handle(ActionEvent event) {
                 System.out.println("Group action changed to: " + groupChoiceBox.getValue() + "\n");
                 groupActionBtn.setTooltip(new Tooltip(groupChoiceBox.getValue() + " a Group"));
+                if(groupChoiceBox.getValue().equalsIgnoreCase("Give")){
+                    groupTargetPlayerCB.setDisable(false);
+                }
+                else {
+                    groupTargetPlayerCB.setDisable(true);
+                }
             }
         });
 
@@ -193,6 +202,12 @@ public class Controller implements Initializable {
             public void handle(ActionEvent event) {
                 System.out.println("Special Card action changed to: " + specialCardChoiceBox.getValue() + "\n");
                 specialCardActionBtn.setTooltip(new Tooltip(specialCardChoiceBox.getValue() + " a Special Card"));
+                if(specialCardChoiceBox.getValue().equalsIgnoreCase("Give")){
+                    specialTargetPlayerCB.setDisable(false);
+                }
+                else{
+                    specialTargetPlayerCB.setDisable(true);
+                }
             }
         });
 
@@ -225,15 +240,21 @@ public class Controller implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Start Game Button - Clicked");
-                mainTabbedPane.getTabs().remove(mainMenuTab);
-                mainTabbedPane.getTabs().add(0, gameplayTab);
-                mainTabbedPane.getSelectionModel().select(0);
+                gameplayTA.appendText("Welcome to the Arena! Good Luck!\n\n");
                 gamePlay.initGame();
                 gamePlay.assignIlluminatiCards();
                 gamePlay.initialUncontrolled();
                 gamePlay.setCurrentPlayer(gamePlay.getPlayerList().get(0));
-                //TO-DO: Output each players illuminati card before starting first round
+                for(Person player: gamePlay.getPlayerList()){
+                    gameplayTA.appendText(player.getUsername() + " - " + player.getIlluminatiCard().getName() + "\n");
+                }
+                gameplayTA.appendText("\n");
+                mainTabbedPane.getTabs().remove(mainMenuTab);
+                mainTabbedPane.getTabs().add(0, gameplayTab);
+                mainTabbedPane.getSelectionModel().select(0);
+                playerToViewChoiceBox.getSelectionModel().select(0);
                 updateOpponentsUI();
+                syncAllTargetBoxes(gamePlay.getPlayerList().get(1).getUsername());
             }
         });
 
@@ -243,7 +264,8 @@ public class Controller implements Initializable {
                 gameplayTA.appendText(gamePlay.getCurrentPlayer().getUsername() + " is attacking to "
                         + attackChoiceBox.getValue() + "\n"
                         + "- Attacking Group: " + attackingCardCB.getValue()  + "\n"
-                        + "- Target Group: " + attackPlayerCB.getValue() + "'s " + attackTargetGroupCB.getValue() + "\n");
+                        + "- Target Group: " + attackPlayerCB.getValue()
+                        + "'s " + attackTargetGroupCB.getValue() + "\n\n");
                 System.out.println("Attack Button - Clicked");
                 System.out.println("- Attack to " + attackChoiceBox.getValue() + "\n"
                         + " from " + attackingCardCB.getValue() + "\n"
@@ -258,7 +280,7 @@ public class Controller implements Initializable {
             public void handle(ActionEvent event) {
                 gameplayTA.appendText(gamePlay.getCurrentPlayer().getUsername()
                         + " decided to " + groupChoiceBox.getValue()
-                        + " the group: "  + groupCardToGiveCB.getValue() + "\n");
+                        + " the group: "  + groupCardToGiveCB.getValue() + "\n\n");
                 System.out.println("Group Actions Button - Clicked");
                 System.out.println("- Action: " + groupChoiceBox.getValue() + "\n"
                         + "- Selected group: " + groupCardToGiveCB.getValue() + "\n"
@@ -272,7 +294,7 @@ public class Controller implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 gameplayTA.appendText(gamePlay.getCurrentPlayer().getUsername() + " "
-                        + specialCardChoiceBox.getValue() + "d " + specialCardToUseCB.getValue() + "\n");
+                        + specialCardChoiceBox.getValue() + "d " + specialCardToUseCB.getValue() + "\n\n");
                 System.out.println("Special Card Actions Button - Clicked");
                 System.out.println("- Action: " + specialCardChoiceBox.getValue() + "\n"
                         + "- Selected Card: " + specialCardToUseCB.getValue() + "\n"
@@ -284,7 +306,7 @@ public class Controller implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 gameplayTA.appendText(gamePlay.getCurrentPlayer().getUsername() + " gave "
-                        + transferMoneyPlayerCB.getValue() + ": " + transferAmountSlider.getValue() + "MB's\n");
+                        + transferMoneyPlayerCB.getValue() + ": " + transferAmountSlider.getValue() + "MB's\n\n");
                 System.out.println("Give Money Button - Clicked");
                 System.out.println("- Recipient: " + transferMoneyPlayerCB.getValue() + "\n"
                         + "- Amount: " + transferAmountSlider.getValue() + "\n");
@@ -297,7 +319,7 @@ public class Controller implements Initializable {
                 gameplayTA.appendText(gamePlay.getCurrentPlayer().getUsername() + " traded "
                         + tradeGiveCardCB.getValue() + " with "
                         + tradePersonCB.getValue() + "'s "
-                        + tradeGetCardCB.getValue() + "\n");
+                        + tradeGetCardCB.getValue() + "\n\n");
                 System.out.println("Trade Button - Clicked");
                 System.out.println("- Card to trade: " + tradeGiveCardCB.getValue()  + "\n"
                         + "- Player to trade with: " + tradePersonCB.getValue()  + "\n"
@@ -308,7 +330,7 @@ public class Controller implements Initializable {
         passTurnBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                gameplayTA.appendText(gamePlay.getCurrentPlayer().getUsername() + " passes their turn\n");
+                gameplayTA.appendText(gamePlay.getCurrentPlayer().getUsername() + " passes their turn\n\n");
                 gamePlay.passTurn();
                 updateOpponentsUI();
             }
@@ -317,7 +339,7 @@ public class Controller implements Initializable {
         endTurnBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                gameplayTA.appendText(gamePlay.getCurrentPlayer().getUsername() + " passes their turn\n");
+                gameplayTA.appendText(gamePlay.getCurrentPlayer().getUsername() + " passes their turn\n\n");
                 gamePlay.endTurn();
                 updateOpponentsUI();
             }
@@ -328,16 +350,13 @@ public class Controller implements Initializable {
             public void handle(ActionEvent event) {
                 System.out.println("Forfeit Button - Clicked \n");
                 //reset all choice boxes to null, remove the player from arraylist, and repopulate the choice boxes
-            }
-        });
-
-        playerToViewChoiceBox.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameplayTA.appendText("Viewing: " + playerToViewChoiceBox.getValue() + "'s cards\n");
-                System.out.println("Viewing: " + playerToViewChoiceBox.getValue() + "'s Hand\n");
-                playerToViewChoiceBox.setTooltip(new Tooltip("Viewing: "
-                        + playerToViewChoiceBox.getValue() + "'s Structure"));
+                if(exitConfirmRB.isSelected()){
+                    gameplayTA.appendText(gamePlay.getCurrentPlayer().getUsername() + " Forfiets!\n\n");
+                    exitDenyRB.setSelected(true);
+                }
+                else{
+                    gameplayTA.appendText("Please select \"Yes\" in order to Forfiet.\n\n");
+                }
             }
         });
 
@@ -345,13 +364,93 @@ public class Controller implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Exit Button - Clicked\n");
-                addPlayerBTN.setDisable(false);
-                mainTabbedPane.getTabs().add(0, mainMenuTab);
-                mainTabbedPane.getTabs().remove(gameplayTab);
-                resetGameUI();
+
+                if(exitConfirmRB.isSelected()){
+                    gameplayTA.appendText(gamePlay.getCurrentPlayer().getUsername() + " Forfiets!\n\n");
+                    addPlayerBTN.setDisable(false);
+                    mainTabbedPane.getTabs().add(0, mainMenuTab);
+                    mainTabbedPane.getTabs().remove(gameplayTab);
+                    resetGameUI();
+                    exitDenyRB.setSelected(true);
+                }
+                else{
+                    gameplayTA.appendText("Please select \"Yes\" in order to Exit.\n\n");
+                }
+
             }
         });
 
+        playerToViewChoiceBox.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameplayTA.appendText("Viewing: " + playerToViewChoiceBox.getValue() + "'s cards\n");
+                playerToViewChoiceBox.setTooltip(new Tooltip("Viewing: "
+                        + playerToViewChoiceBox.getValue() + "'s Structure"));
+                powerStructureTA.clear();
+                powerStructureTA.appendText("Print " + playerToViewChoiceBox.getValue() + "'s PowerStructure here");
+            }
+        });
+
+        attackPlayerCB.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String targetPlayer = attackPlayerCB.getValue();
+                syncAllTargetBoxes(targetPlayer);
+            }
+        });
+
+        groupTargetPlayerCB.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String action = groupChoiceBox.getValue();
+                if(action.equals("Give")){
+                    String recipient = groupTargetPlayerCB.getValue();
+                    String cardToGive = groupCardToGiveCB.getValue();
+                    String cardToFather = groupTargetGroupCB.getValue();
+                    syncAllTargetBoxes(recipient);
+                }
+                else{   //move the group card within personal structure
+                    String cardParent = groupTargetGroupCB.getValue();
+                    String cardChild = groupCardToGiveCB.getValue();
+                    //if both cards are same, print error
+                    //else if parent has space, move under it
+                    //else, error that the parent doesn't have space
+                }
+            }
+        });
+
+        specialTargetPlayerCB.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String action = specialCardChoiceBox.getValue();
+                if(action.equals("Give")){
+                    specialTargetPlayerCB.setDisable(false);
+                    String recipient = specialTargetPlayerCB.getValue();
+                    String cardToGive = specialCardToUseCB.getValue();
+                    syncAllTargetBoxes(recipient);
+                }
+                else{   //use the group card within personal structure
+                    specialTargetPlayerCB.setDisable(true);
+                    String cardToUse = specialCardToUseCB.getValue();
+                }
+            }
+        });
+
+        transferMoneyPlayerCB.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String personSelected = transferMoneyPlayerCB.getValue();
+                syncAllTargetBoxes(personSelected);
+            }
+        });
+
+        tradePersonCB.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String playerSelected = tradePersonCB.getValue();
+                syncAllTargetBoxes(playerSelected);
+            }
+        });
     }
 
     public void resetGameUI(){
@@ -359,11 +458,24 @@ public class Controller implements Initializable {
         mainMenuTA.clear();
         gameplayTA.clear();
         playerToViewChoiceBox.getItems().clear();
+        attackingCardCB.getItems().clear();
+        attackPlayerCB.getItems().clear();
         attackTargetGroupCB.getItems().clear();
+
+        groupCardToGiveCB.getItems().clear();
         groupTargetPlayerCB.getItems().clear();
+        groupCardToGiveCB.getItems().clear();
+
+        specialCardToUseCB.getItems().clear();
         specialTargetPlayerCB.getItems().clear();
+
         transferMoneyPlayerCB.getItems().clear();
+        transferAmountSlider.setValue(0);
+
         tradePersonCB.getItems().clear();
+        tradeGiveCardCB.getItems().clear();
+        tradeGetCardCB.getItems().clear();
+
         usernameTF.setDisable(false);
         startGameBtn.setDisable(true);
         gamePlay.setPlayerList(new ArrayList<>());
@@ -384,7 +496,6 @@ public class Controller implements Initializable {
             if(gamePlay.getPlayerList().size() >= 2){
                 startGameBtn.setDisable(false);
                 gameplayTab.setDisable(false);
-                playerToViewChoiceBox.getSelectionModel().select(0);
             }
         }
         else{                                                   //if false, then output that the player exists
@@ -410,6 +521,7 @@ public class Controller implements Initializable {
         tradePersonCB.getItems().clear();
 
         opponents = gamePlay.resetOpponents();
+        attackPlayerCB.getItems().add("Uncontrolled");
         for(String oppName: opponents){
             attackPlayerCB.getItems().add(oppName);
             groupTargetPlayerCB.getItems().add(oppName);
@@ -423,6 +535,24 @@ public class Controller implements Initializable {
         specialTargetPlayerCB.getSelectionModel().select(0);
         transferMoneyPlayerCB.getSelectionModel().select(0);
         tradePersonCB.getSelectionModel().select(0);
+    }
+
+    public void syncAllTargetBoxes(String playerSelected) {
+        attackPlayerCB.getSelectionModel().select(playerSelected);
+        groupTargetPlayerCB.getSelectionModel().select(playerSelected);
+        specialTargetPlayerCB.getSelectionModel().select(playerSelected);
+        transferMoneyPlayerCB.getSelectionModel().select(playerSelected);
+        tradePersonCB.getSelectionModel().select(playerSelected);
+
+        attackTargetGroupCB.getItems().clear();
+        groupTargetGroupCB.getItems().clear();
+        transferAmountSlider.setValue(0);
+        tradeGetCardCB.getItems().clear();
+
+        //TODO - Populate the bottom target groups with the cards belonging to playerSelected
+        attackTargetGroupCB.getItems().clear();
+        groupTargetGroupCB.getItems().clear();
+        tradeGetCardCB.getItems().clear();
     }
 
 }
