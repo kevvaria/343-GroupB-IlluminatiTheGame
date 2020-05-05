@@ -208,24 +208,17 @@ public class Game {
 
         if(attackType.equalsIgnoreCase("control")){
             int maxControlTotal = attackingGroup.getPower() - targetGroup.getResistance();
-            int numberRolled = (int) (Math.random() * (12-0+1)+1);
+            int numberRolled = 0;//(int) (Math.random() * (12-0+1)+1);
             if(numberRolled <= maxControlTotal && numberRolled <11)
                 if(uncontrolledGroupsPile.contains(targetGroup))
                     currentPlayer.pStructure.findPowerStructure(currentPlayer.pStructure, attackingGroup, targetGroup, 0); //add
                 else
                 {
-                    for(int k = 0; k < playerList.size(); k++)
-                    {
-                        Person p = playerList.get(k);
-                        PowerStructure newPlans =p.pStructure.returnPowerStructure(p.pStructure,targetGroup,0);
-                        for(PowerStructure power : newPlans.getChildren())
-                        {
-                            GroupCard c = (GroupCard) power.LABEL;
-                            uncontrolledGroupsPile.add(c);
-                        }
+                    PowerStructure tempPowerStruct = opponent.pStructure.returnPowerStructure(opponent.pStructure,targetGroup,0);
+                    GroupCard tempGroupCard = (GroupCard) tempPowerStruct.LABEL;
+                    currentPlayer.pStructure.findPowerStructure(currentPlayer.pStructure, attackingGroup, tempGroupCard, 0);
+                    opponent.pStructure.removePowerStructure(opponent.pStructure,targetGroup,0);
 
-                        p.pStructure.removePowerStructure(p.pStructure,targetGroup,0);
-                    }
                 }
 
 
@@ -514,4 +507,5 @@ public class Game {
 //
 //
 //    }
+
 }
