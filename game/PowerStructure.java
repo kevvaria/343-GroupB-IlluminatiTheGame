@@ -1,6 +1,7 @@
 package game;
 
-import cardsSrc.*;
+import cardsSrc.Card;
+import cardsSrc.GroupCard;
 
 import java.util.ArrayList;
 
@@ -118,47 +119,47 @@ public class PowerStructure {
 
     }
 
-    public static void main(String[] args) {
-        int n = 3;
-        Person hero = new Person("hero");
-
-        Game games = new Game();
-
-        Card card = new TheBavarianIlluminati();
-        GroupCard gC = new ThePhoneCompany();
-        GroupCard gCard = new Democrats();
-        games.uncontrolledGroupsPile.add(gCard);
-        PowerStructure root = new PowerStructure(card, n);
-        String attack = "control";
-        hero.pStructure = root;
-        //String username1 = "a";
-        String username2 = "uncontrolled";
-        games.setCurrentPlayer(hero);
-
-        root.addChild(gC);
-        //root.findPowerStructure(root,gC,gCard,0);
-
-        games.attack(attack,gC.getName(),gCard.getName(),username2);
-
-
-//        root.getChild(0).addChild("Elements");
-//        root.getChild(0).getChild(0).addChild("Metals");
-//        root.getChild(0).getChild(0).addChild("Metalloids");
-//        root.getChild(0).getChild(0).addChild("Non-metals");
-//        root.getChild(0).addChild("Compounds");
-//        root.getChild(0).getChild(1).addChild("Water");
-//        root.getChild(0).getChild(1).addChild("Carbon dioxide");
-//        root.getChild(0).getChild(1).addChild("Salt");
-//        root.getChild(0).getChild(1).addChild("Camphor");  // won't add
-//        root.addChild("Mixture");
-//        root.getChild(1).addChild("Homogeneous");
-//        root.getChild(1).getChild(0).addChild("Air");
-//        root.getChild(1).getChild(0).addChild("Vinegar");
-//        root.getChild(1).addChild("Heterogeneous");
-//        root.getChild(1).getChild(1).addChild("Colloids");
-//        root.getChild(1).getChild(1).addChild("Suspensions");
-
-        PowerStructure.print(root);
-    }
+//    public static void main(String[] args) {
+//        int n = 3;
+//        Person hero = new Person("hero");
+//
+//        Game games = new Game();
+//
+//        Card card = new TheBavarianIlluminati();
+//        GroupCard gC = new ThePhoneCompany();
+//        GroupCard gCard = new Democrats();
+//        games.uncontrolledGroupsPile.add(gCard);
+//        PowerStructure root = new PowerStructure(card, n);
+//        String attack = "control";
+//        hero.pStructure = root;
+//        //String username1 = "a";
+//        String username2 = "uncontrolled";
+//        games.setCurrentPlayer(hero);
+//
+//        root.addChild(gC);
+//        //root.findPowerStructure(root,gC,gCard,0);
+//
+//        games.attack(attack,gC.getName(),gCard.getName(),username2);
+//
+//
+////        root.getChild(0).addChild("Elements");
+////        root.getChild(0).getChild(0).addChild("Metals");
+////        root.getChild(0).getChild(0).addChild("Metalloids");
+////        root.getChild(0).getChild(0).addChild("Non-metals");
+////        root.getChild(0).addChild("Compounds");
+////        root.getChild(0).getChild(1).addChild("Water");
+////        root.getChild(0).getChild(1).addChild("Carbon dioxide");
+////        root.getChild(0).getChild(1).addChild("Salt");
+////        root.getChild(0).getChild(1).addChild("Camphor");  // won't add
+////        root.addChild("Mixture");
+////        root.getChild(1).addChild("Homogeneous");
+////        root.getChild(1).getChild(0).addChild("Air");
+////        root.getChild(1).getChild(0).addChild("Vinegar");
+////        root.getChild(1).addChild("Heterogeneous");
+////        root.getChild(1).getChild(1).addChild("Colloids");
+////        root.getChild(1).getChild(1).addChild("Suspensions");
+//
+//        PowerStructure.print(root);
+//    }
 }
 

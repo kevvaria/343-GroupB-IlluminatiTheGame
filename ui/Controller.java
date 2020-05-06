@@ -521,7 +521,6 @@ public class Controller implements Initializable {
         tradePersonCB.getItems().clear();
 
         opponents = gamePlay.resetOpponents();
-        attackPlayerCB.getItems().add("Uncontrolled");
         for(String oppName: opponents){
             attackPlayerCB.getItems().add(oppName);
             groupTargetPlayerCB.getItems().add(oppName);
@@ -529,6 +528,7 @@ public class Controller implements Initializable {
             transferMoneyPlayerCB.getItems().add(oppName);
             tradePersonCB.getItems().add(oppName);
         }
+        attackPlayerCB.getItems().add("Uncontrolled");
 
         attackPlayerCB.getSelectionModel().select(0);
         groupTargetPlayerCB.getSelectionModel().select(0);

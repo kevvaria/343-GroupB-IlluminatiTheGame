@@ -3,7 +3,6 @@ package game;
 import cardsSrc.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 public class Game {
@@ -76,10 +75,13 @@ public class Game {
     }
 
     public void initGame(){
-
-
-        resetGameData();
-
+        illuminatiCards.clear();
+        deck.clear();
+        uncontrolledGroupsPile.clear();
+        System.out.println("Decks Cleared\n\n");
+        playerCount = 0;
+        currentPlayer = null;
+        loadCards();
     }
 
     public boolean addAPlayer(Person playerToAdd){
@@ -106,16 +108,16 @@ public class Game {
         Collections.shuffle(deck);
 
     }
-    public void shufflePlayOfOrder(){
-
-        Collections.shuffle(playerList);
-        // Display order of players
-        System.out.println("Turn order determined:");
-        for(int i = 0; i < playerList.size(); i++) {
-            System.out.println((i + 1) + ". " + playerList.get(i));
-        }
-
-    }
+//    public void shufflePlayOfOrder(){
+//
+//        Collections.shuffle(playerList);
+//        // Display order of players
+//        System.out.println("Turn order determined:");
+//        for(int i = 0; i < playerList.size(); i++) {
+//            System.out.println((i + 1) + ". " + playerList.get(i).getUsername());
+//        }
+//
+//    }
 
 
     public void initialUncontrolled()
@@ -133,7 +135,6 @@ public class Game {
                 GroupCard gC = (GroupCard) drawnCard;
                 uncontrolledGroupsPile.add(gC);
             }
-
         }
     }
 
@@ -419,10 +420,6 @@ public class Game {
         deck.add(new UndergroundNewspaper());
         deck.add(new VideoGames());
         deck.add(new Yuppies());
-        Collections.shuffle(deck);
-
-
-
         // Ability Cards
         deck.add(new Assassination());
         deck.add(new Bribery());
@@ -439,11 +436,12 @@ public class Game {
         deck.add(new SwissBankAccount());
         deck.add(new WhisperingCampaign());
         deck.add(new WhiteCollarCrime());
+        Collections.shuffle(deck);
     }
 
     //method to convert string to GroupCard
     //Parameter is String and Person
-    public GroupCard stringToGroupCard(String name,Person p){
+    public GroupCard stringToGroupCard(String name, Person p){
         GroupCard card = null;
 
         for (PowerStructure crd : p.pStructure.getChildren()) {
@@ -486,16 +484,6 @@ public class Game {
             }
         }
         return opponents;
-    }
-
-    public void resetGameData(){
-        illuminatiCards.clear();
-        deck.clear();
-        uncontrolledGroupsPile.clear();
-        System.out.println("Decks Cleared\n\n");
-        playerCount = 0;
-        currentPlayer = null;
-        loadCards();
     }
 
 //
